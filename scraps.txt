@@ -1,0 +1,51 @@
+
+
+
+
+
+//    foreach($pattern_numless as $key => $item) {
+//        $pos = strpos($word, $item, 0);
+//        if ($pos !== FALSE) {
+//            $position_index_numbers[$pos] = $pattern_numbers[$key];
+//            //echo $pos . " " . $pattern_numbers[$key] . "\r\n";
+//        }
+//    }
+//
+
+
+
+
+
+    //print_r($position_index);
+    //print_r($position_index_numbers_extracted);
+    //print_r($position_index_numbers);
+
+
+//    ## Find Patterns in the input
+//    foreach($pattern_numless as $key => $item) {
+//        $find = preg_match("/$item/", $word, $matches);
+//        if($find){
+//            //echo $pattern[$key];
+//            $found[] = $key;
+////            foreach($matches as $match){
+////                echo $match . "\r\n";
+////            }
+//        }
+//    }
+
+//    ## Beginning
+//    foreach($found as $key => $item){
+//        if(strpos($word, $pattern_numless[$item], 0) === 0){
+//            $found_matches[] = $item;
+////            echo $pattern[$item] . "\r\n";
+//        }
+//    }
+//
+//    ## End
+//    foreach($found as $item){
+//        if(substr($pattern_numless[$item],2, $str_length) === '.' && strpos($word, $pattern_numless[$item], 0) === strpos($word, $pattern_numless[$item])){
+//            $found_matches[] = $item;
+////            echo $pattern[$item] . "\r\n";
+//        }
+//    }
+
