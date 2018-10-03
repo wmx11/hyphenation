@@ -2,20 +2,20 @@
 
 function syllables($input){
     ## Read File
-    $pattern = file('pattern.txt');
+    $patterns = file('pattern.txt');
 
     ## Pattern without numbers
     $pattern_without_numbers = [];
     ## Remove Numbers from the pattern
-    foreach($pattern as $item){
-        $pattern_without_numbers[] = trim(preg_replace('/[0-9]+/', '', $item));
+    foreach($patterns as $pattern){
+        $pattern_without_numbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
     }
 
     ## Pattern numbers
     $pattern_only_numbers = [];
     ## Remove letters from the pattern
-    foreach($pattern as $item){
-        $pattern_only_numbers[] = trim(preg_replace('/[aA-zZ.]/', '', $item));
+    foreach($patterns as $pattern){
+        $pattern_only_numbers[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
     }
 
     ## Add dots to the input word to determine the beginning and end
@@ -35,13 +35,13 @@ function syllables($input){
     foreach($pattern_without_numbers as $key => $item) { // Find Patterns Without Numbers in a word
         $pos = strpos($word, $item, 0); // Find the position on patterns
         if ($pos !== FALSE) {
-             $pattern_numbers_all[$key] = $position_index[] = $pattern_only_numbers[$key];
+             $pattern_numbers_all[$key+1] = $position_index[] = $pattern_only_numbers[$key];
              $pattern_index[] = $key;
-//            echo "Position: " . $pos . "\r\n";
-//            echo "Pattern: " . $pattern[$key] . "\r\n";
-//            echo "Pattern Number: " . $pattern_only_numbers[$key] . "\r\n";
-//            echo "\r\n";
-            $num_pos = strpos($pattern[$key], $pattern_numbers_all[$key], 0);
+            echo "Position: " . $pos . "\r\n";
+            echo "Pattern: " . $patterns[$key] . "\r\n";
+            echo "Pattern Number: " . $pattern_only_numbers[$key] . "\r\n";
+            echo "\r\n";
+            $num_pos = strpos($patterns[$key], $pattern_numbers_all[$key], 0);
             if($num_pos !== FALSE) {
                 //echo $num_pos . " " . $pattern[$key] . " " . $pos . "\r\n";
                 $word_array[$pos] .= $pattern_only_numbers[$key];
@@ -53,7 +53,7 @@ function syllables($input){
 
     foreach($pattern_num_split as $number){
         foreach($pattern_index as $item_num){
-            $pos = strpos($pattern[$item_num], $number);
+            $pos = strpos($patterns[$item_num], $number);
             if($pos !== FALSE){
                 //echo $pattern[$item_num] . " " . $pos . " " . $number . "\r\n";
                 $pattern_number_position[$pos][] = $number;
@@ -62,7 +62,7 @@ function syllables($input){
     }
 
     foreach($letters_array as $key => $item){
-        $word_with_numbers_array[] = $word_array[$key] . $item;
+        $word_with_numbers_array[] = $item . $word_array[$key];
     }
 
     $word_with_numbers_dotted = implode("", $word_with_numbers_array);
@@ -76,16 +76,16 @@ function syllables($input){
 
     //print_r($pattern_number_position);
 
-    print_r($pattern_numbers_all);
+    //print_r($pattern_numbers_all);
 
     //print_r($pattern_num_split);
 
-//    print_r($pattern_index);
+//print_r($pattern_index);
 
     //echo $word_with_numbers;
-//    print_r($word_with_numbers_array);
+    //print_r($word_with_numbers_array);
 //    print_r($word_array);
-//    print_r($letters_array);
+    //print_r($letters_array);
 
     echo "\r\n";
         echo $word;
