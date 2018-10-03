@@ -72,7 +72,7 @@ function syllables($input){
     $remove_even_numbers = str_replace($even_numbers, "", $word_with_numbers);
     $hyphenated_word = str_replace($odd_numbers, "-", $remove_even_numbers);
 
-    //echo $finished_word = ltrim($hyphenated_word, '-');
+    echo $finished_word = ltrim($hyphenated_word, '-');
 
     //print_r($pattern_number_position);
 
