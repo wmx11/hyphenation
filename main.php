@@ -1,17 +1,21 @@
 <?php
-require_once('hyphenate.php');
-include('Timer.php');
-$timer = new Timer;
 
-$words = ['mistranslate','buttons','alphabetical', 'bewildering','ceremony','hovercraft','lexicographically','programmer','recursion'];
+spl_autoload_register(function($class_name){
+    $path = 'Inc/';
+    $filename = $path . str_replace('\\', '/', $class_name) . '.php';
+    require_once($filename);
+});
 
-//$words = file('words.txt');
 
-foreach($words as $input){
-    hyphenate($input);
-}
+$timer = new Timer();
 
-//hyphenate($argv[1]);
+
+$pattern = new Patterns('Resources/pattern.txt');
+$words = new Words($argv[1]);
+
+$words->findPatternPositionInWord($pattern->pattern_without_numbers, $words->word, $pattern->getPatterns());
+$words->findNumberPositionInPattern($pattern->pattern_without_characters);
+$words->hyphenate();
 
 $timer->printTimeElapsed();
 ?>
