@@ -5,16 +5,16 @@ namespace Inc;
 class Patterns implements PatternsInterface
 {
     private $patterns;
-    public $patternWithoutNumbers = [];
-    public $patternWithoutCharacters = [];
-    public $patternPositionInWord = [];
+    private $patternWithoutNumbers = [];
+    private $patternWithoutCharacters = [];
+    private $patternPositionInWord = [];
 
     public function __construct($fileLocation)
     {
         $input = $this->readFile($fileLocation);
         $this->setPattern($input);
-        $this->removePatternNumbers();
-        $this->removePatternLetters();
+        $this->setPatternsWithoutNumbers();
+        $this->setPatternsWithoutLetters();
     }
 
     public function readFile($fileLocation)
@@ -27,14 +27,14 @@ class Patterns implements PatternsInterface
         $this->patterns = $input;
     }
 
-    private function removePatternNumbers()
+    private function setPatternsWithoutNumbers()
     {
         foreach($this->patterns as $pattern) {
             $this->patternWithoutNumbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
         }
     }
 
-    private function removePatternLetters()
+    private function setPatternsWithoutLetters()
     {
         foreach($this->patterns as $pattern) {
             $this->patternWithoutCharacters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
@@ -52,7 +52,7 @@ class Patterns implements PatternsInterface
         return $this->patternWithoutNumbers;
     }
 
-    public function getPatternsWithoutLetters()
+    public function getPatternsWithoutCharacters()
     {
         return $this->patternWithoutCharacters;
     }
