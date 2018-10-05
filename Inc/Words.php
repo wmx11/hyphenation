@@ -4,15 +4,15 @@ namespace Inc;
 
 class Words implements WordsInterface
 {
-    public $word;
-    public $wordLength;
-    public $wordLettersArray;
-    public $wordLengthArrayEmpty;
-    public $matchedArray = [];
-    public $patternPositionInWord = [];
+    private $word;
+    private $wordLength;
+    private $wordLettersArray;
+    private $wordLengthArrayEmpty;
+    private $matchedArray = [];
+    private $patternPositionInWord = [];
     const ODD_NUMBERS = [1, 3, 5, 7, 9];
     const EVEN_NUMBERS = [0, 2, 4, 6, 8];
-    public $hyphenateWord;
+    private $hyphenateWord = "";
 
 //    public function __construct()
 //    {
@@ -26,36 +26,38 @@ class Words implements WordsInterface
         $this->findNumberPositionInWord($this->patternPositionInWord);
         $this->addNumbersAndLetters($this->wordLettersArray, $this->wordLengthArrayEmpty);
         $this->cleanWord($this->matchedArray);
-        $this->printWord();
+        //echo $this->hyphenateWord . "\n";
     }
 
-    public function readWord($input)
+    public function setWord($input)
     {
-        $this->word = '.' . $input . '.';
+        $this->word = ".{$input}.";
         $this->getWordLength($this->word);
         $this->getWordLettersArray($this->word);
         $this->getWordLengthArrayEmpty();
-        //return $this->word;
+        //echo $this->word . "\n";
+    }
+
+    public function getWord() {
+        return trim($this->word);
     }
 
     public function getWordLength($input)
     {
         $input = $this->word;
         $this->wordLength = strlen($input);
-        //return $this->word_length;
     }
 
     public function getWordLettersArray($input)
     {
         $input = $this->word;
         $this->wordLettersArray = str_split($input);
-        //return $this->word_letters_array;
     }
 
     public function getWordLengthArrayEmpty()
     {
         $this->wordLengthArrayEmpty = array_fill(0, $this->wordLength, null);
-        return $this->wordLengthArrayEmpty;
+        //return $this->wordLengthArrayEmpty;
     }
 
     public function findNumberPositionInWord($patternPositionInWord)
@@ -100,6 +102,9 @@ class Words implements WordsInterface
 
     public function addNumbersAndLetters($wordLettersArray, $wordLengthArrayEmpty)
     {
+        if(!empty($this->matchedArray)) {
+            unset($this->matchedArray);
+        }
         foreach ($wordLettersArray as $letterPosition => $letter) {
             $this->matchedArray[] = $wordLengthArrayEmpty[$letterPosition] . $letter;
         }
@@ -110,17 +115,13 @@ class Words implements WordsInterface
         $wordWithNumbers = implode("", $matchedArray);
         $removeDots = str_replace('.', '', $wordWithNumbers);
         $removeEvenNumbers = str_replace(self::EVEN_NUMBERS, '', $removeDots);
-        $this->hyphenateWord = str_replace(self::ODD_NUMBERS, '-', $removeEvenNumbers);
+        $removeOddNumbers = str_replace(self::ODD_NUMBERS, '-', $removeEvenNumbers);
+        $this->hyphenateWord = $removeOddNumbers;
     }
 
-    public function printWord()
+    public function getHyphenatedWord()
     {
-        echo $this->hyphenateWord . "\r\n";
-    }
-
-    public function logWord()
-    {
-        return $this->hyphenateWord . "\n";
+        return trim($this->hyphenateWord) . "\n";
     }
 }
 
