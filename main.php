@@ -16,31 +16,30 @@ spl_autoload_register(function ($className) {
     }
 });
 
-$wordCount = 0;
-
 $timer = new Timer();
 $pattern = new Patterns('Resources/pattern.txt');
 $words = new Words();
 $logger = new Logger();
 $cache = new Cache('cache.txt');
 
-$words->readWord($argv[1]);
-$words->findPatternPositionInWord($pattern->patternWithoutNumbers, $words->word, $pattern->getPatterns());
-$words->findNumberPositionInPattern($pattern->patternWithoutCharacters);
-$words->hyphenate();
-$cache->set($argv[1], $words->logWord());
+//$words->setWord($argv[1]);
+//$words->findPatternPositionInWord($pattern->getPatternsWithoutNumbers(), $words->getWord(), $pattern->getPatterns());
+//$words->findNumberPositionInPattern($pattern->getPatternsWithoutCharacters());
+//$words->hyphenate();
+//$cache->set($argv[1], $words->getHyphenatedWord());
 
-//$wordsFile = file('Resources/words.txt');
-//for ($i=0; $i < 50; $i++) {
-//    $words->readWord($wordsFile[$i]);
-//    $words->findPatternPositionInWord($pattern->patternWithoutNumbers, $words->word, $pattern->getPatterns());
-//    $words->findNumberPositionInPattern($pattern->patternWithoutCharacters);
-//    $words->hyphenate();
-//    $cache->set($wordsFile[$i], $words->logWord());
-//
-//}
+$wordsFile = file('Resources/words.txt');
+foreach ($wordsFile as $item) {
+    $words->setWord(trim($item));
+    $words->findPatternPositionInWord($pattern->getPatternsWithoutNumbers(), $words->getWord(), $pattern->getPatterns());
+    $words->findNumberPositionInPattern($pattern->getPatternsWithoutCharacters());
+    $words->hyphenate();
+    echo $words->getHyphenatedWord();
+    $logger->setLog(trim($item), trim($words->getHyphenatedWord()));
+    $cache->set($item, $words->getHyphenatedWord());
+}
 
-$timer->printTimeElapsed();
-$logger->setLog($timer->getTimeElapsed(), $words->logWord());
+echo $timer->getTimeElapsed() . "\r\n";
+$logger->setLog(trim($timer->getTimeElapsed()), $words->getHyphenatedWord());
 
 ?>
