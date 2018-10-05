@@ -14,9 +14,9 @@ class Cache implements CacheInterface
     {
         $this->cacheName = $name;
         $this->cacheFile = fopen($this->cacheName,'a');
-        if (empty($this->cacheArray)) {
-            $this->cacheToArray();
-        }
+//        if (empty($this->cacheArray)) {
+//            $this->cacheToArray();
+//        }
     }
 
     public function cacheToArray()
@@ -59,17 +59,10 @@ class Cache implements CacheInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null) // <--- Change this to write to an array instead, create a destructor to write array into a file
     {
-        if(array_key_exists($key, $this->cacheArray) === false) {
-            $cacheContent = "$key, $value";
+            $cacheContent = trim("$key,$value", " ");
             $cacheWrite = fwrite($this->cacheFile, $cacheContent);
-            if($cacheWrite !== false) {
-                return true;
-            } else {
-                return false;
-            }
-        }
     }
 
     /**
