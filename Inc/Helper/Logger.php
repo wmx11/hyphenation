@@ -7,7 +7,7 @@ use Psr\Log\AbstractLogger;
 class Logger extends AbstractLogger
 {
 
-    public $log;
+    private $log;
 
     public function __construct()
     {
@@ -32,7 +32,7 @@ class Logger extends AbstractLogger
     public function setLog($time, $hyphenatedWord)
     {
         fwrite($this->log, $time);
-        fwrite($this->log, $hyphenatedWord);
+        fwrite($this->log, "$hyphenatedWord \r\n");
     }
 
     public function logTime($time)
