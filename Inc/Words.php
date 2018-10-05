@@ -1,89 +1,93 @@
 <?php
 
+namespace Inc;
+
 class Words implements WordsInterface
 {
     public $word;
-    public $word_length;
-    public $word_letters_array;
-    public $word_length_array_empty;
-    public $matched_array = [];
-    public $pattern_position_in_word = [];
+    public $wordLength;
+    public $wordLettersArray;
+    public $wordLengthArrayEmpty;
+    public $matchedArray = [];
+    public $patternPositionInWord = [];
     const ODD_NUMBERS = [1, 3, 5, 7, 9];
     const EVEN_NUMBERS = [0, 2, 4, 6, 8];
-    public $hyphenate_word;
+    public $hyphenateWord;
 
-    public function __construct($word)
-    {
-        $this->getWord($word);
-        $this->getWordLength($word);
-        $this->getWordLettersArray($word);
-        $this->getWordLengthArrayEmpty();
-    }
+//    public function __construct()
+//    {
+//        $this->getWordLength($this->word);
+//        $this->getWordLettersArray($this->word);
+//        $this->getWordLengthArrayEmpty();
+//    }
 
     public function hyphenate()
     {
-        $this->findNumberPositionInWord($this->pattern_position_in_word);
-        $this->addNumbersAndLetters($this->word_letters_array, $this->word_length_array_empty);
-        $this->cleanWord($this->matched_array);
+        $this->findNumberPositionInWord($this->patternPositionInWord);
+        $this->addNumbersAndLetters($this->wordLettersArray, $this->wordLengthArrayEmpty);
+        $this->cleanWord($this->matchedArray);
         $this->printWord();
     }
 
-    public function getWord($input)
+    public function readWord($input)
     {
         $this->word = '.' . $input . '.';
+        $this->getWordLength($this->word);
+        $this->getWordLettersArray($this->word);
+        $this->getWordLengthArrayEmpty();
         //return $this->word;
     }
 
     public function getWordLength($input)
     {
         $input = $this->word;
-        $this->word_length = strlen($input);
+        $this->wordLength = strlen($input);
         //return $this->word_length;
     }
 
     public function getWordLettersArray($input)
     {
         $input = $this->word;
-        $this->word_letters_array = str_split($input);
+        $this->wordLettersArray = str_split($input);
         //return $this->word_letters_array;
     }
 
     public function getWordLengthArrayEmpty()
     {
-        $this->word_length_array_empty = array_fill(0, $this->word_length, null);
-        return $this->word_length_array_empty;
+        $this->wordLengthArrayEmpty = array_fill(0, $this->wordLength, null);
+        return $this->wordLengthArrayEmpty;
     }
 
-    public function findNumberPositionInWord($pattern_position_in_word)
+    public function findNumberPositionInWord($patternPositionInWord)
     {
-        foreach ($pattern_position_in_word as $position_in_word => $pattern) {
-            foreach ($pattern as $pattern_number => $number_position_in_pattern) {
-                if (!empty ($number_position_in_pattern)){
-                    $place_in_word = ($position_in_word + $number_position_in_pattern);
-                    $this->word_length_array_empty[$place_in_word] = $pattern_number;
+        foreach ($patternPositionInWord as $positionInWord => $pattern) {
+            foreach ($pattern as $patternNumber => $numberPositionInPattern) {
+                if (!empty ($numberPositionInPattern)){
+                    $placeInWord = ($positionInWord + $numberPositionInPattern);
+                    $this->wordLengthArrayEmpty[$placeInWord] = $patternNumber;
                 }
             }
         }
     }
 
-    public function findPatternPositionInWord($pattern_without_numbers, $word, $patterns)
+    public function findPatternPositionInWord($patternWithoutNumbers, $word, $patterns)
     {
-        foreach ($pattern_without_numbers as $pattern_index => $pattern) {
-            $position_in_word = strpos($word, $pattern);
-            if ($position_in_word !== false) {
-                $this->pattern_position_in_word[$position_in_word][$pattern_index] = $patterns[$pattern_index];
+        foreach ($patternWithoutNumbers as $patternIndex => $pattern) {
+            $positionInWord = strpos($word, $pattern);
+            if ($positionInWord !== false) {
+                $this->patternPositionInWord[$positionInWord][$patternIndex] = $patterns[$patternIndex];
             }
         }
     }
 
-    public function findNumberPositionInPattern($pattern_without_characters)
+    public function findNumberPositionInPattern($patternWithoutCharacters)
     {
-        foreach ($this->pattern_position_in_word as $position_in_word => $pattern) {
-            foreach ($pattern as $pattern_index => $full_pattern) {
-                $number_position_in_pattern = strpos($full_pattern, $pattern_without_characters[$pattern_index]);
-                unset ($this->pattern_position_in_word[$position_in_word][$pattern_index]);
-                if ($number_position_in_pattern >= 0) {
-                    $this->pattern_position_in_word[$position_in_word][$pattern_without_characters[$pattern_index]] = $number_position_in_pattern;
+        foreach ($this->patternPositionInWord as $positionInWord => $pattern) {
+            foreach ($pattern as $patternIndex => $fullPattern) {
+                $numberPositionInPattern = strpos($fullPattern, $patternWithoutCharacters[$patternIndex]);
+                unset ($this->patternPositionInWord[$positionInWord][$patternIndex]);
+                if ($numberPositionInPattern >= 0) {
+                    $this->patternPositionInWord[$positionInWord][$patternWithoutCharacters[$patternIndex]] = $numberPositionInPattern;
                 }
             }
         }
@@ -91,29 +95,33 @@ class Words implements WordsInterface
 
     public function getPatternPositionInWord()
     {
-        return $this->pattern_position_in_word;
+        return $this->patternPositionInWord;
     }
 
-    public function addNumbersAndLetters($word_letters_array, $word_length_array_empty)
+    public function addNumbersAndLetters($wordLettersArray, $wordLengthArrayEmpty)
     {
-        foreach ($word_letters_array as $letter_position => $letter) {
-            $this->matched_array[] = $word_length_array_empty[$letter_position] . $letter;
+        foreach ($wordLettersArray as $letterPosition => $letter) {
+            $this->matchedArray[] = $wordLengthArrayEmpty[$letterPosition] . $letter;
         }
     }
 
-    public function cleanWord($matched_array)
+    public function cleanWord($matchedArray)
     {
-        $word_with_numbers = implode("", $matched_array);
-        $remove_dots = str_replace('.', '', $word_with_numbers);
-        $remove_even_numbers = str_replace(self::EVEN_NUMBERS, '', $remove_dots);
-        $this->hyphenate_word = str_replace(self::ODD_NUMBERS, '-', $remove_even_numbers);
+        $wordWithNumbers = implode("", $matchedArray);
+        $removeDots = str_replace('.', '', $wordWithNumbers);
+        $removeEvenNumbers = str_replace(self::EVEN_NUMBERS, '', $removeDots);
+        $this->hyphenateWord = str_replace(self::ODD_NUMBERS, '-', $removeEvenNumbers);
     }
 
     public function printWord()
     {
-        echo $this->hyphenate_word . "\r\n";
+        echo $this->hyphenateWord . "\r\n";
     }
 
+    public function logWord()
+    {
+        return $this->hyphenateWord . "\n";
+    }
 }
 
 ?>

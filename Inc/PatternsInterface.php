@@ -1,7 +1,9 @@
 <?php
 
+namespace Inc;
+
 interface PatternsInterface
 {
-    public function readPatternFile($fileLocation);
+    public function readFile($fileLocation);
 }
 ?>

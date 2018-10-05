@@ -1,5 +1,7 @@
 <?php
 
+namespace Inc;
+
 class InputReader implements InputInterface
 {
     public function __construct()

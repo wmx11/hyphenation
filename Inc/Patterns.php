@@ -1,11 +1,13 @@
 <?php
-//namespace Inc;
+
+namespace Inc;
+
 class Patterns implements PatternsInterface
 {
     private $patterns;
-    public $pattern_without_numbers = [];
-    public $pattern_without_characters = [];
-    public $pattern_position_in_word = [];
+    public $patternWithoutNumbers = [];
+    public $patternWithoutCharacters = [];
+    public $patternPositionInWord = [];
 
     public function __construct($fileLocation)
     {
@@ -28,14 +30,14 @@ class Patterns implements PatternsInterface
     private function removePatternNumbers()
     {
         foreach($this->patterns as $pattern) {
-            $this->pattern_without_numbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
+            $this->patternWithoutNumbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
         }
     }
 
     private function removePatternLetters()
     {
         foreach($this->patterns as $pattern) {
-            $this->pattern_without_characters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
+            $this->patternWithoutCharacters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
         }
     }
 
@@ -47,12 +49,12 @@ class Patterns implements PatternsInterface
 
     public function getPatternsWithoutNumbers()
     {
-        return $this->pattern_without_numbers;
+        return $this->patternWithoutNumbers;
     }
 
     public function getPatternsWithoutLetters()
     {
-        return $this->pattern_without_characters;
+        return $this->patternWithoutCharacters;
     }
 }
 ?>

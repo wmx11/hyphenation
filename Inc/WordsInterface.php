@@ -1,7 +1,9 @@
 <?php
 
+namespace Inc;
+
 interface WordsInterface
 {
-    public function getWord($input);
+    public function readWord($input);
 }
 ?>

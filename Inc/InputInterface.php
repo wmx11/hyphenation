@@ -1,5 +1,7 @@
 <?php
 
+namespace Inc;
+
 interface InputInterface
 {
     public function nextLine();
