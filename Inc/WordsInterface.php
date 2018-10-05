@@ -4,6 +4,6 @@ namespace Inc;
 
 interface WordsInterface
 {
-    public function readWord($input);
+    public function setWord($input);
 }
 ?>
