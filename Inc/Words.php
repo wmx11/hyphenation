@@ -13,6 +13,7 @@ class Words implements WordsInterface
     const ODD_NUMBERS = [1, 3, 5, 7, 9];
     const EVEN_NUMBERS = [0, 2, 4, 6, 8];
     private $hyphenateWord = "";
+    private $wordCount = 0;
 
 //    public function __construct()
 //    {
@@ -21,12 +22,17 @@ class Words implements WordsInterface
 //        $this->getWordLengthArrayEmpty();
 //    }
 
+    public function __destruct()
+    {
+        $this->wordCount = 0;
+    }
+
     public function hyphenate()
     {
         $this->findNumberPositionInWord($this->patternPositionInWord);
         $this->addNumbersAndLetters($this->wordLettersArray, $this->wordLengthArrayEmpty);
         $this->cleanWord($this->matchedArray);
-        //echo $this->hyphenateWord . "\n";
+        $this->wordCount++;
     }
 
     public function setWord($input)
@@ -38,8 +44,14 @@ class Words implements WordsInterface
         //echo $this->word . "\n";
     }
 
-    public function getWord() {
+    public function getWord()
+    {
         return trim($this->word);
+    }
+
+    public function getWordCount()
+    {
+        return $this->wordCount;
     }
 
     public function getWordLength($input)
@@ -121,7 +133,7 @@ class Words implements WordsInterface
 
     public function getHyphenatedWord()
     {
-        return trim($this->hyphenateWord) . "\n";
+        return trim($this->hyphenateWord);
     }
 }
 
