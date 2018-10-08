@@ -14,6 +14,11 @@ class Logger extends AbstractLogger
         $this->log = fopen( 'logger.txt', 'a');
     }
 
+    public function __destruct()
+    {
+        fclose($this->log);
+    }
+
     /**
      * Logs with an arbitrary level.
      *
@@ -25,8 +30,8 @@ class Logger extends AbstractLogger
 
     public function log($level, $message, array $context = array())
     {
-        //print_r($message);
-        fwrite($this->log, strtr($message, $context));
+        fwrite($this->log, "$level . \r\n");
+        fwrite($this->log, "$message . \r\n");
     }
 
     public function setLog($time, $hyphenatedWord)
