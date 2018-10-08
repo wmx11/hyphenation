@@ -7,25 +7,42 @@ use Psr\SimpleCache\CacheInterface;
 class Cache implements CacheInterface
 {
     private $cacheName;
-    public $cacheFile;
-    public $cacheArray = [];
+    private $cacheFile;
+    private $cacheArray = [];
+    private $itemsToCache = [];
 
     public function __construct($name)
     {
         $this->cacheName = $name;
         $this->cacheFile = fopen($this->cacheName,'a');
-//        if (empty($this->cacheArray)) {
-//            $this->cacheToArray();
-//        }
+        $this->cacheToArray();
+
+    }
+
+    public function __destruct()
+    {
+        foreach ($this->itemsToCache as $key => $value) {
+            if(empty($this->cacheArray[$key])) {
+                fwrite($this->cacheFile, "$key, $value \r\n");
+            }
+        }
+
+        fclose($this->cacheFile);
+        unset($this->itemsToCache);
     }
 
     public function cacheToArray()
     {
-        $myArray = file($this->cacheName);
-        foreach($myArray as $line) {
-            $comma = explode(", ", $line);
-            $this->cacheArray[$comma[0]] = $comma[1];
+        $cacheToArray = file($this->cacheName);
+        foreach($cacheToArray as $line) {
+            $word = explode(", ", $line);
+            $this->cacheArray[trim($word[0])] = trim($word[1]);
         }
+    }
+
+    public function getNewCachedItems()
+    {
+        return count($this->itemsToCache);
     }
 
     /**
@@ -42,7 +59,11 @@ class Cache implements CacheInterface
 
     public function get($key, $default = null)
     {
-        return $this->cacheArray[$key];
+        if (!empty($this->cacheArray[$key])) {
+            return $this->cacheArray[$key];
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -59,10 +80,9 @@ class Cache implements CacheInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
-    public function set($key, $value, $ttl = null) // <--- Change this to write to an array instead, create a destructor to write array into a file
+    public function set($key, $value, $ttl = null)
     {
-            $cacheContent = trim("$key,$value", " ");
-            $cacheWrite = fwrite($this->cacheFile, $cacheContent);
+        $this->itemsToCache[$key] = $value;
     }
 
     /**
