@@ -2,7 +2,7 @@
 
 namespace Inc;
 
-class Patterns implements PatternsInterface
+class PatternReader implements PatternsInterface
 {
     private $patterns;
     private $patternWithoutNumbers = [];
