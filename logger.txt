@@ -217,3 +217,255 @@ Words Hyphenated: 0 .
 Time Elapsed: 0 minutes, 0 seconds, 0.103904 milliseconds
 Items Cached: 0 . 
 Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.215126 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.097583 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.094579 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.094042 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.098780 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.105535 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.095578 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.095846 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.094200 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.104668 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.099863 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.115071 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.110116 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 4 seconds, 3.290718 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 50 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.186244 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.198586 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.427127 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 5 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.130543 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.196689 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.127568 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.114359 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.281281 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.108272 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.120237 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.128328 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.130970 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.278308 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.178703 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.177751 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.157158 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.188890 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.135271 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.201433 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.220281 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.127067 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.121945 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.109293 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.221224 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.112502 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.115187 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.113250 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.127423 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.250355 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.122578 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.124421 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.133215 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.117985 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.216388 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.176941 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.146683 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.138538 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.232338 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.134455 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.135474 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.146325 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.150619 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.135034 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.348151 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 2 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.139161 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.143109 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.211705 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.253499 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.163969 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.190750 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.439410 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.141725 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.149488 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 1 seconds, 0.146275 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.301397 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 4 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.103268 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 3 seconds, 3.201239 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 0 seconds, 0.672703 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 3 seconds, 3.449006 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 1 minutes, 10 seconds, 70.495986 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 6 seconds, 5.586906 milliseconds
+Items Cached: 1 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 8 seconds, 8.229775 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 5 seconds, 5.462786 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 5 seconds, 4.428028 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 57 seconds, 57.685837 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 26 seconds, 25.953050 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 12 seconds, 12.518114 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 15 seconds, 15.744600 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
+Time Elapsed: 0 minutes, 7 seconds, 6.920485 milliseconds
+Items Cached: 1 . 
+Words Hyphenated: 1 . 
+Time Elapsed: 0 minutes, 8 seconds, 7.743234 milliseconds
+Items Cached: 0 . 
+Words Hyphenated: 0 . 
