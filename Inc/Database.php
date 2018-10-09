@@ -5,33 +5,28 @@ namespace Inc;
 use PDO;
 use PDOException;
 
-class Database
+class Database implements DatabaseInterface
 {
-    private $localhost = 'localhost';
-    private $user = 'root';
-    private $password = 'password';
-    private $database = 'hyphenation';
+    private $rowValues;
+    private $insertValues;
     private $connection;
-
-    private $patterns = [];
-    private $words = [];
-    private $hyphenatedWords = [];
 
     public function __construct()
     {
+        $db = require_once('Config.php');
+        $localhost = $db->localhost;
+        $database = $db->database;
+        $user = $db->user;
+        $password = $db->password;
+
         try {
-            $this->connection = new PDO("mysql:host=$this->localhost;dbname=$this->database", $this->user, $this->password);
+            $this->connection = new PDO("mysql:host=$localhost;dbname=$database", $user, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //echo "Connected";
         }
         catch(PDOException $e)
         {
             echo "Connection failed: " . $e->getMessage();
         }
-
-        $this->getPatternsFromDb();
-        $this->getWordsFromDb();
-        $this->getHyphenatedWordFromDb();
     }
 
     public function __destruct()
@@ -44,77 +39,52 @@ class Database
         return $this->connection;
     }
 
-    public function insertPatterns($pattern)
+    /**
+     * @param $data is an array with column name => value;
+     */
+
+    private function setValues($data)
     {
-        $stmt = $this->connection->prepare("INSERT INTO patterns (pattern) VALUES (:pattern)");
-        $stmt->bindParam(':pattern', $pattern);
+        foreach ($data as $row => $value) {
+            $this->rowValues .= ", " . $row;
+            $this->insertValues .= " :" . $row . ",";
+        }
+        $row = ltrim($this->rowValues, ", ");
+        $values = rtrim(ltrim($this->insertValues, " "), ",");
+
+        $this->rowValues = $row;
+        $this->insertValues = $values;
+    }
+
+    public function insert($tableName, $data)
+    {
+        $this->setValues($data);
+        $sql = "INSERT INTO $tableName ($this->rowValues) VALUES ($this->insertValues)";
+        $stmt = $this->connection->prepare($sql);
+        //echo $sql . "\r\n";
+        $stmt->execute($data);
+        $this->rowValues = "";
+        $this->insertValues = "";
+    }
+
+    public function get($select = "*", $tableName, $parameter = null)
+    {
+        $sql = "SELECT $select FROM $tableName $parameter";
+        $stmt = $this->connection->query($sql)->fetchAll();
+        return $stmt;
+    }
+
+    public function delete($tableName, $where)
+    {
+        $sql = "DELETE FROM $tableName WHERE $where";
+        $stmt = $this->connection->prepare($sql);
         $stmt->execute();
     }
 
-    public function insertWords($word)
+    public function clear($tableName)
     {
-        $stmt = $this->connection->prepare("INSERT INTO words (word) VALUES (:word)");
-        $stmt->bindParam(':word', $word);
+        $sql = "DELETE FROM $tableName";
+        $stmt = $this->connection->prepare($sql);
         $stmt->execute();
     }
-
-    public function insertHyphenatedWord($wordId, $hyphenatedWord)
-    {
-        if (empty($this->hyphenatedWords[$wordId])) {
-            $stmt = $this->connection->prepare("INSERT INTO hyphenated_words (word_id, hyphenated_word) VALUES (:word_id, :hyphenated_word)");
-            $stmt->bindParam(':word_id', $wordId);
-            $stmt->bindParam(':hyphenated_word', $hyphenatedWord);
-            $stmt->execute();
-            echo "$wordId => $hyphenatedWord Inserted \r\n";
-        }
-    }
-
-    public function getPatternsFromDb()
-    {
-        $stmt = $this->connection->query("SELECT * FROM patterns")->fetchAll();
-        foreach ($stmt as $id => $row) {
-            $this->patterns[$row['id']] = $row['pattern'];
-        }
-    }
-
-    public function getWordsFromDb()
-    {
-        $stmt = $this->connection->query("SELECT * FROM words ORDER BY id LIMIT 50")->fetchAll();
-        foreach ($stmt as $id => $row) {
-            $this->words[trim($row['id'])] = trim($row['word']);
-        }
-    }
-
-    public function getHyphenatedWordFromDb()
-    {
-        $stmt = $this->connection->query("SELECT * FROM hyphenated_words")->fetchAll();
-        foreach ($stmt as $id => $row) {
-            $this->hyphenatedWords[$row['word_id']] = $row['hyphenated_word'];
-        }
-    }
-
-    public function ifWordExists($id)
-    {
-        if (!empty($this->hyphenatedWords[$id])) {
-            echo $this->hyphenatedWords[$id] . "\r\n";
-        } else {
-            return false;
-        }
-    }
-
-    public function returnPatterns()
-    {
-        return $this->patterns;
-    }
-
-    public function returnWords()
-    {
-        return $this->words;
-    }
-
-    public function returnHyphenatedWords()
-    {
-        return $this->hyphenatedWords;
-    }
-
 }
