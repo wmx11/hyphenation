@@ -38,9 +38,9 @@ class Words implements WordsInterface
     public function setWord($input)
     {
         $this->word = ".{$input}.";
-        $this->getWordLength($this->word);
-        $this->getWordLettersArray($this->word);
-        $this->getWordLengthArrayEmpty();
+        $this->setWordLength($this->word);
+        $this->setWordLettersArray($this->word);
+        $this->setWordLengthArrayEmpty();
         //echo $this->word . "\n";
     }
 
@@ -54,22 +54,21 @@ class Words implements WordsInterface
         return $this->wordCount;
     }
 
-    public function getWordLength($input)
+    public function setWordLength($input)
     {
         $input = $this->word;
         $this->wordLength = strlen($input);
     }
 
-    public function getWordLettersArray($input)
+    public function setWordLettersArray($input)
     {
         $input = $this->word;
         $this->wordLettersArray = str_split($input);
     }
 
-    public function getWordLengthArrayEmpty()
+    public function setWordLengthArrayEmpty()
     {
         $this->wordLengthArrayEmpty = array_fill(0, $this->wordLength, null);
-        //return $this->wordLengthArrayEmpty;
     }
 
     public function findNumberPositionInWord($patternPositionInWord)
