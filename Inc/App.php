@@ -32,12 +32,16 @@ class App
 
     public function runApp()
     {
-        $startMsg = "Welcome to the hyphenator! \r\n";
+        $startMsg = "################################ \r\n";
+        $startMsg .= "Welcome to the hyphenator! \r\n";
         $startMsg .= "Here are the following functions: \r\n";
-        $startMsg .= "hyphenate -file (Will hyphenate words from a file) \r\n";
-        $startMsg .= "hyphenate -db (Will hyphenate words from a database) \r\n";
-        $startMsg .= "hyphenate (Will hyphenate a single word) \r\n";
+        $startMsg .= "* hyphenate -file (Hyphenate words from a file) \r\n";
+        $startMsg .= "* hyphenate -db (Hyphenate words from a database) \r\n";
+        $startMsg .= "* hyphenate (Hyphenate a single word) \r\n";
+        $startMsg .= "* exit (Stop the app) \r\n";
         $startMsg .= "Type help to display all functions \r\n";
+        $startMsg .= "################################ \r\n";
+
         echo $startMsg;
 
         $input = readline('What would you like to do?: ');
@@ -59,8 +63,12 @@ class App
                     $this->hyphenateWord($input);
                 break;
 
+                case "exit":
+                    die();
+                break;
+
                 default:
-                    echo "Sorry";
+                    echo "Type help to display all functions \r\n";
                 break;
             }
         }
@@ -128,5 +136,10 @@ class App
     {
         $this->logger->logTime($this->timer->getTimeElapsed() ."\r\n");
         $this->logger->log("Items Cached: " . $this->cache->getNewCachedItems(), "Words Hyphenated: " . $this->words->getWordCount());
+    }
+
+    public function returnDb()
+    {
+        return $this->db;
     }
 }
