@@ -40,7 +40,7 @@ class Database implements DatabaseInterface
     }
 
     /**
-     * @param $data is an array with column name => value;
+     * @param $data an array with column_name => value;
      */
 
     private function setValues($data)
@@ -86,5 +86,20 @@ class Database implements DatabaseInterface
         $sql = "DELETE FROM $tableName";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
+    }
+
+    public function beginTransaction()
+    {
+        $this->connection->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->connection->commit();
+    }
+
+    public function rollBack()
+    {
+        $this->connection->rollBack();
     }
 }
