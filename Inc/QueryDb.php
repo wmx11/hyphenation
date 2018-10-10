@@ -8,12 +8,10 @@ class QueryDb
     private $words = [];
     private $hyphenatedWords = [];
     private $con;
-    private $connection;
 
     public function __construct()
     {
         $this->con = new Database();
-        $this->connection = $this->con->connect();
         $this->getPatternsFromDb();
         $this->getWordsFromDb();
         $this->getHyphenatedWordFromDb();
@@ -67,7 +65,7 @@ class QueryDb
 
     public function getWordsFromDb()
     {
-        $stmt = $this->con->get('*', 'words', 'order by id desc limit 5');
+        $stmt = $this->con->get('*', 'words', 'order by id asc limit 50');
         foreach ($stmt as $id => $row) {
             $this->words[trim($row['id'])] = trim($row['word']);
         }
@@ -103,5 +101,23 @@ class QueryDb
     public function returnHyphenatedWords()
     {
         return $this->hyphenatedWords;
+    }
+
+    public function insertTransaction()
+    {
+        try {
+            $data = [
+                'word_id' => 666,
+                'hyphenated_word' => 'ba-na-na-na-na'
+            ];
+            $this->con->beginTransaction();
+            $this->con->insert('hyphenated_words', $data);
+            $this->con->commit();
+        }
+
+        catch(\Exception $e) {
+            echo $e->getMessage();
+            $this->con->rollBack();
+        }
     }
 }
