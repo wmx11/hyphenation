@@ -8,7 +8,9 @@ use Inc\Words;
 use Inc\Helper\Logger;
 use Inc\Helper\Cache;
 use Inc\PatternReaderDb;
+use Inc\Database;
 use Inc\QueryDb;
+use Inc\Api;
 
 class App
 {
@@ -17,7 +19,9 @@ class App
     private $words;
     private $logger;
     private $cache;
+    private $con;
     private $db;
+    private $api;
     private $input;
 
     public function __construct()
@@ -27,49 +31,55 @@ class App
         $this->words = new Words();
         $this->logger = new Logger();
         $this->cache = new Cache('cache.txt');
-        $this->db = new QueryDb();
+        $this->con = new Database();
+        $this->db = new QueryDb($this->con);
+        $this->api = new Api($this->con);
     }
 
     public function runApp()
     {
-        $startMsg = "################################ \r\n";
-        $startMsg .= "Welcome to the hyphenator! \r\n";
-        $startMsg .= "Here are the following functions: \r\n";
-        $startMsg .= "* hyphenate -file (Hyphenate words from a file) \r\n";
-        $startMsg .= "* hyphenate -db (Hyphenate words from a database) \r\n";
-        $startMsg .= "* hyphenate (Hyphenate a single word) \r\n";
-        $startMsg .= "* exit (Stop the app) \r\n";
-        $startMsg .= "Type help to display all functions \r\n";
-        $startMsg .= "################################ \r\n";
-
-        echo $startMsg;
-
-        $input = readline('What would you like to do?: ');
-
-        if (empty($input)) {
-            echo "Type help to display all functions \r\n";
+        if(isset($_SERVER['REQUEST_URI'])) {
+            $this->api->runApi();
         } else {
-            switch($input) {
-                case "hyphenate -file":
-                    $this->hyphenateFromFile();
-                break;
+            $startMsg = "################################ \r\n";
+            $startMsg .= "Welcome to the hyphenator! \r\n";
+            $startMsg .= "Here are the following functions: \r\n";
+            $startMsg .= "* hyphenate -file (Hyphenate words from a file) \r\n";
+            $startMsg .= "* hyphenate -db (Hyphenate words from a database) \r\n";
+            $startMsg .= "* hyphenate (Hyphenate a single word) \r\n";
+            $startMsg .= "* exit (Stop the app) \r\n";
+            $startMsg .= "Type help to display all functions \r\n";
+            $startMsg .= "################################ \r\n";
 
-                case "hyphenate -db":
-                    $this->hyphenateFromDb();
-                break;
+            echo $startMsg;
 
-                case "hyphenate":
-                    $input = readline("Enter a word to hyphenate: ");
-                    $this->hyphenateWord($input);
-                break;
+            $input = readline('What would you like to do?: ');
 
-                case "exit":
-                    die();
-                break;
+            if (empty($input)) {
+                echo "Type help to display all functions \r\n";
+            } else {
+                switch ($input) {
+                    case "hyphenate -file":
+                        $this->hyphenateFromFile();
+                        break;
 
-                default:
-                    echo "Type help to display all functions \r\n";
-                break;
+                    case "hyphenate -db":
+                        $this->hyphenateFromDb();
+                        break;
+
+                    case "hyphenate":
+                        $input = readline("Enter a word to hyphenate: ");
+                        $this->hyphenateWord($input);
+                        break;
+
+                    case "exit":
+                        die();
+                        break;
+
+                    default:
+                        echo "Type help to display all functions \r\n";
+                        break;
+                }
             }
         }
     }
