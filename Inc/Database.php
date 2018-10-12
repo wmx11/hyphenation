@@ -78,6 +78,7 @@ class Database implements DatabaseInterface
         $sql = "SELECT $select FROM $tableName $parameter";
         $stmt = $this->connection->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $stmt;
+
     }
 
     public function delete($tableName, $where)
