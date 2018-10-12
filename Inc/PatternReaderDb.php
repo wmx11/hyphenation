@@ -7,7 +7,6 @@ class PatternReaderDb
     private $patterns = [];
     private $patternWithoutNumbers = [];
     private $patternWithoutCharacters = [];
-    private $patternPositionInWord = [];
 
     public function __construct($dbArray)
     {
@@ -17,7 +16,7 @@ class PatternReaderDb
     }
 
 
-    public function setPattern($input)
+    private function setPattern($input)
     {
         foreach ($input as $index => $pattern) {
             $this->patterns[$index] = $pattern;
@@ -26,14 +25,14 @@ class PatternReaderDb
 
     private function setPatternsWithoutNumbers()
     {
-        foreach($this->patterns as $pattern) {
+        foreach ($this->patterns as $pattern) {
             $this->patternWithoutNumbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
         }
     }
 
     private function setPatternsWithoutLetters()
     {
-        foreach($this->patterns as $pattern) {
+        foreach ($this->patterns as $pattern) {
             $this->patternWithoutCharacters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
         }
     }
