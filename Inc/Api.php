@@ -2,8 +2,6 @@
 
 namespace Inc;
 
-use Inc\Database;
-
 class Api
 {
     private $db;
