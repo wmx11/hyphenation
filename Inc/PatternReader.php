@@ -7,7 +7,6 @@ class PatternReader implements PatternsInterface
     private $patterns;
     private $patternWithoutNumbers = [];
     private $patternWithoutCharacters = [];
-    private $patternPositionInWord = [];
 
     public function __construct($fileLocation)
     {
@@ -22,21 +21,21 @@ class PatternReader implements PatternsInterface
         return file($fileLocation);
     }
 
-    public function setPattern($input)
+    private function setPattern($input)
     {
         $this->patterns = $input;
     }
 
     private function setPatternsWithoutNumbers()
     {
-        foreach($this->patterns as $pattern) {
+        foreach ($this->patterns as $pattern) {
             $this->patternWithoutNumbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
         }
     }
 
     private function setPatternsWithoutLetters()
     {
-        foreach($this->patterns as $pattern) {
+        foreach ($this->patterns as $pattern) {
             $this->patternWithoutCharacters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));
         }
     }
@@ -57,4 +56,5 @@ class PatternReader implements PatternsInterface
         return $this->patternWithoutCharacters;
     }
 }
+
 ?>
