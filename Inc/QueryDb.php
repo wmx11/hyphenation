@@ -4,16 +4,16 @@ namespace Inc;
 
 class QueryDb
 {
-    private $patterns = [];
-    private $words = [];
-    private $hyphenatedWords = [];
     private $con;
+    private $words = [];
+    private $patterns = [];
+    private $hyphenatedWords = [];
 
     public function __construct($db)
     {
         $this->con = $db;
-        $this->getPatternsFromDb();
         $this->getWordsFromDb();
+        $this->getPatternsFromDb();
         $this->getHyphenatedWordFromDb();
     }
 
@@ -113,9 +113,7 @@ class QueryDb
             $this->con->beginTransaction();
             $this->con->insert('hyphenated_words', $data);
             $this->con->commit();
-        }
-
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             echo $e->getMessage();
             $this->con->rollBack();
         }
