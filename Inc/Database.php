@@ -23,9 +23,7 @@ class Database implements DatabaseInterface
         try {
             $this->connection = new PDO("mysql:host=$localhost;dbname=$database", $user, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
         }
     }
@@ -60,6 +58,13 @@ class Database implements DatabaseInterface
         $this->updateValues = $update;
     }
 
+    private function resetValues()
+    {
+        $this->rowValues = "";
+        $this->insertValues = "";
+        $this->updateValues = "";
+    }
+
     public function insert($tableName, $data)
     {
         $this->setValues($data);
@@ -67,9 +72,7 @@ class Database implements DatabaseInterface
         $stmt = $this->connection->prepare($sql);
         //echo $sql . "\r\n";
         $stmt->execute($data);
-        $this->rowValues = "";
-        $this->insertValues = "";
-        $this->updateValues = "";
+        $this->resetValues();
         echo "Inserted";
     }
 
@@ -95,9 +98,7 @@ class Database implements DatabaseInterface
         $sql = "UPDATE $tableName SET $this->updateValues WHERE $where";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($data);
-        $this->rowValues = "";
-        $this->insertValues = "";
-        $this->updateValues = "";
+        $this->resetValues();
         echo "Updated";
     }
 
