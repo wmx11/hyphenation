@@ -9,9 +9,9 @@ class QueryDb
     private $hyphenatedWords = [];
     private $con;
 
-    public function __construct()
+    public function __construct($db)
     {
-        $this->con = new Database();
+        $this->con = $db;
         $this->getPatternsFromDb();
         $this->getWordsFromDb();
         $this->getHyphenatedWordFromDb();
@@ -65,7 +65,7 @@ class QueryDb
 
     public function getWordsFromDb()
     {
-        $stmt = $this->con->get('*', 'words', 'order by id asc limit 50');
+        $stmt = $this->con->get('*', 'words', 'order by id asc limit 122');
         foreach ($stmt as $id => $row) {
             $this->words[trim($row['id'])] = trim($row['word']);
         }
