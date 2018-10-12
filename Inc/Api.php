@@ -111,7 +111,7 @@ class Api
                 $string .= "$key = '$value' AND ";
             }
         }
-        $this->query = rtrim($string, " AND") . " ";
+        $this->query = rtrim($string, " AND");
         $this->setTableName();
     }
 
@@ -127,10 +127,12 @@ class Api
             header("Content-Type: application/json");
             $patterns = $this->db->get('*', $this->tableName, "limit 50");
             print_r(json_encode($patterns));
+
         } elseif ($this->validateUrlParametersGet() === true && $this->getParameters() === false) {
             header("Content-Type: application/json");
             $patterns = $this->db->get('*', $this->tableName, "WHERE id = $this->id");
             print_r(json_encode($patterns));
+
         } elseif ($this->getParameters() === true) {
             header("Content-Type: application/json");
             $this->buildQuery();
