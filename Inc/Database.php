@@ -5,7 +5,7 @@ namespace Inc;
 use PDO;
 use PDOException;
 
-class Database implements DatabaseInterface
+class Database extends QueryBuilder implements DatabaseInterface
 {
     private $rowValues;
     private $insertValues;
@@ -70,23 +70,32 @@ class Database implements DatabaseInterface
         $this->setValues($data);
         $sql = "INSERT INTO $tableName ($this->rowValues) VALUES ($this->insertValues)";
         $stmt = $this->connection->prepare($sql);
-        //echo $sql . "\r\n";
         $stmt->execute($data);
         $this->resetValues();
         echo "Inserted";
     }
 
-    public function get($select = "*", $tableName, $parameter = null)
+    public function get($select = null, $tableName = null, $parameter = null)
     {
-        $sql = "SELECT $select FROM $tableName $parameter";
+        $sql = null;
+        if ($select !== null || $tableName !== null || $parameter !== null) {
+            $sql = "SELECT $select FROM $tableName $parameter";
+        } else {
+            $sql = $this->returnQuery();
+        }
         $stmt = $this->connection->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $stmt;
 
     }
 
-    public function delete($tableName, $where)
+    public function delete($tableName = null, $where = null)
     {
-        $sql = "DELETE FROM $tableName WHERE $where";
+        $sql = null;
+        if ($tableName !== null || $where !== null) {
+            $sql = "DELETE FROM $tableName WHERE $where";
+        } else {
+            $sql = "DELETE " . $this->returnQuery();
+        }
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         echo "Deleted";
