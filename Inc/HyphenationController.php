@@ -2,7 +2,7 @@
 
 namespace Inc;
 
-class QueryDb
+class HyphenationController
 {
     private $con;
     private $words = [];
