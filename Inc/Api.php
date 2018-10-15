@@ -2,9 +2,9 @@
 
 namespace Inc;
 
-use Inc\Helper\ApiUrl;
+use Inc\Helper\ApiUrlParser;
 
-class Api extends ApiUrl
+class Api extends ApiUrlParser
 {
     private $db;
     private $url;
@@ -128,18 +128,28 @@ class Api extends ApiUrl
     {
         if ($this->validateUrlGet() === true && $this->getParameters() === false) {
             header("Content-Type: application/json");
-            $patterns = $this->db->get('*', $this->tableName, "limit 50");
+            $this->db->select();
+            $this->db->from($this->tableName);
+            $this->db->orderBy('id', 'desc');
+            $this->db->limit(20);
+            $patterns = $this->db->get();
             print_r(json_encode($patterns));
 
         } elseif ($this->validateUrlParametersGet() === true && $this->getParameters() === false) {
             header("Content-Type: application/json");
-            $patterns = $this->db->get('*', $this->tableName, "WHERE id = $this->id");
+            $this->db->select();
+            $this->db->from($this->tableName);
+            $this->db->where("id = $this->id");
+            $patterns = $this->db->get();
             print_r(json_encode($patterns));
 
         } elseif ($this->getParameters() === true) {
             header("Content-Type: application/json");
             $this->buildQuery();
-            $patterns = $this->db->get('*', $this->tableName, "WHERE $this->query");
+            $this->db->select();
+            $this->db->from($this->tableName);
+            $this->db->where($this->query);
+            $patterns = $this->db->get();
             print_r(json_encode($patterns));
         }
     }
@@ -169,6 +179,11 @@ class Api extends ApiUrl
             $id = $info['id'];
             $this->db->delete($this->tableName, "id = $id");
         }
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
 // TODO metodas key'ams
