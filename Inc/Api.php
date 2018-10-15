@@ -2,7 +2,9 @@
 
 namespace Inc;
 
-class Api
+use Inc\Helper\ApiUrl;
+
+class Api extends ApiUrl
 {
     private $db;
     private $url;
@@ -15,7 +17,7 @@ class Api
     public function __construct($db)
     {
         $this->db = $db;
-        $this->setUrl();
+        $this->url = $this->setUrl();
         $this->setParameters();
     }
 
@@ -49,18 +51,20 @@ class Api
         }
     }
 
-    private function setUrl()
-    {
-        if (strpos($_SERVER['REQUEST_URI'], "?") === false) {
-            $this->url = explode("/", $_SERVER['REQUEST_URI']);
-        }
-    }
-
     private function setParameters()
     {
-        $this->tableName = $this->url[3]; // Sets Table Name
-        if (!empty($this->url[4])): $this->id = $this->url[4]; endif; // Sets ID for Get Request
-        if (!empty($this->url[4]) && is_numeric($this->url[4]) === false): $this->endPoint = $this->url[4]; endif; // Sets Endpoint for Post, Put, Delete Requests
+        // Set Table Name
+        $this->tableName = $this->url[3];
+
+        // Set ID for Get Request
+        if (!empty($this->url[4])) {
+            $this->id = $this->url[4];
+        }
+
+        // Set Endpoint for Post, Put, Delete Requests
+        if (!empty($this->url[4]) && is_numeric($this->url[4]) === false) {
+            $this->endPoint = $this->url[4];
+        }
     }
 
     private function validateUrlGet()
@@ -102,21 +106,22 @@ class Api
     private function buildQuery()
     {
         $string = "";
-        foreach ($_GET as $key => $value) {
-            if (is_numeric($value) === true) {
-                $string .= "$key = $value AND ";
+        foreach ($_GET as $column => $filter) {
+            if (is_numeric($filter) === true) {
+                $string .= "$column = $filter AND ";
             } else {
-                $string .= "$key = '$value' AND ";
+                $string .= "$column = '$filter' AND ";
             }
         }
-        $this->query = rtrim($string, " AND");
+        $this->query = preg_replace('/[^A-Za-z0-9\-=_ ]/', '', rtrim($string, " AND"));
         $this->setTableName();
     }
 
     private function setTableName()
     {
-        $url1 = explode("?", $_SERVER['REQUEST_URI'])[0];
-        $this->tableName = explode("/", $url1)[3];
+        // TODO -- Remove key indexes, find a method
+        $url = explode("?", $_SERVER['REQUEST_URI'])[0];
+        $this->tableName = explode("/", $url)[3];
     }
 
     private function get()
@@ -166,3 +171,4 @@ class Api
         }
     }
 }
+// TODO metodas key'ams

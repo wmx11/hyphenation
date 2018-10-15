@@ -12,7 +12,6 @@ class QueryDb
     public function __construct($db)
     {
         $this->con = $db;
-        $this->getWordsFromDb();
         $this->getPatternsFromDb();
         $this->getHyphenatedWordFromDb();
     }
