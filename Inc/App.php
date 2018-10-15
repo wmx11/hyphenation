@@ -4,13 +4,13 @@ namespace Inc;
 
 use Inc\Helper\Timer;
 use Inc\PatternReader;
-use Inc\Words;
+//use Inc\Words;
 use Inc\Helper\Logger;
 use Inc\Helper\Cache;
-use Inc\PatternReaderDb;
+//use Inc\PatternReaderDb;
 use Inc\Database;
-use Inc\QueryDb;
-use Inc\Api;
+//use Inc\HyphenationController;
+//use Inc\Api;
 
 class App
 {
@@ -22,23 +22,22 @@ class App
     private $con;
     private $db;
     private $api;
-    private $input;
 
     public function __construct()
     {
         $this->timer = new Timer();
-        $this->pattern = new PatternReader('Resources/pattern.txt');
+        $this->pattern = new ProxyPattern('Resources/pattern.txt');
         $this->words = new Words();
         $this->logger = new Logger();
         $this->cache = new Cache('cache.txt');
         $this->con = new Database();
-        $this->db = new QueryDb($this->con);
+        $this->db = new HyphenationController($this->con);
         $this->api = new Api($this->con);
     }
 
     public function runApp()
     {
-        if(isset($_SERVER['REQUEST_URI'])) {
+        if (!empty($_SERVER['REQUEST_URI'])) {
             $this->api->runApi();
         } else {
             $startMsg = "################################ \r\n";
@@ -144,7 +143,7 @@ class App
 
     public function log()
     {
-        $this->logger->logTime($this->timer->getTimeElapsed() ."\r\n");
+        $this->logger->logTime($this->timer->getTimeElapsed() . "\r\n");
         $this->logger->log("Items Cached: " . $this->cache->getNewCachedItems(), "Words Hyphenated: " . $this->words->getWordCount());
     }
 
