@@ -1,10 +1,14 @@
 <?php
 
-use Inc\App;
+//use Inc\App;
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once('Inc/Autoload.php');
 
-$app = new App();
+$container = new DI\Container();
+//$builder = new DI\ContainerBuilder();
+//$builder->addDefinitions('App');
+$app = $container->get();
+
+//$app = new App();
 $app->runApp();
-
-
