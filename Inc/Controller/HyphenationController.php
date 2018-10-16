@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc;
+namespace Inc\Controller;
 
 class HyphenationController
 {
@@ -12,6 +12,7 @@ class HyphenationController
     public function __construct($db)
     {
         $this->con = $db;
+        $this->getWordsFromDb();
         $this->getPatternsFromDb();
         $this->getHyphenatedWordFromDb();
     }
@@ -64,7 +65,7 @@ class HyphenationController
 
     public function getWordsFromDb()
     {
-        $stmt = $this->con->get('*', 'words', 'order by id asc limit 122');
+        $stmt = $this->con->get('*', 'words', 'order by id asc limit 135');
         foreach ($stmt as $id => $row) {
             $this->words[trim($row['id'])] = trim($row['word']);
         }

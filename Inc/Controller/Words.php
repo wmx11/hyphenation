@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc;
+namespace Inc\Controller;
 
 class Words extends AbstractWordsParser implements WordsInterface
 {
@@ -10,8 +10,8 @@ class Words extends AbstractWordsParser implements WordsInterface
     private $wordLengthArrayEmpty;
     private $matchedArray = array ();
     private $patternPositionInWord = array ();
-    const ODD_NUMBERS = array (1, 3, 5, 7, 9);
-    const EVEN_NUMBERS = array (0, 2, 4, 6, 8);
+    private $oddNumbers = array (1, 3, 5, 7, 9);
+    private $evenNumbers = array (0, 2, 4, 6, 8);
     private $hyphenateWord = "";
     private $wordCount = 0;
 
@@ -103,8 +103,8 @@ class Words extends AbstractWordsParser implements WordsInterface
     {
         $wordWithNumbers = implode("", $matchedArray);
         $removeDots = str_replace('.', '', $wordWithNumbers);
-        $removeEvenNumbers = str_replace(self::EVEN_NUMBERS, '', $removeDots);
-        $removeOddNumbers = str_replace(self::ODD_NUMBERS, '-', $removeEvenNumbers);
+        $removeEvenNumbers = str_replace($this->evenNumbers, '', $removeDots);
+        $removeOddNumbers = str_replace($this->oddNumbers, '-', $removeEvenNumbers);
         $this->hyphenateWord = $removeOddNumbers;
     }
 
