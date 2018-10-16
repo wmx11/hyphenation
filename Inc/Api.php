@@ -3,22 +3,22 @@
 namespace Inc;
 
 use Inc\Helper\ApiUrlParser;
+use Inc\Database\Database;
 
 class Api extends ApiUrlParser
 {
     private $db;
-    private $url;
     private $id;
-    private $api = "api";
-    private $query;
     private $tableName;
     private $endPoint;
 
-    public function __construct($db)
+    public function __construct(Database $db)
     {
         $this->db = $db;
-        $this->url = $this->setUrl();
-        $this->setParameters();
+        $this->setUriParameters();
+        $this->tableName = $this->setTableNameInitial();
+        $this->id = $this->setId();
+        $this->endPoint = $this->setEndpoint();
     }
 
     public function __destruct()
@@ -51,79 +51,6 @@ class Api extends ApiUrlParser
         }
     }
 
-    private function setParameters()
-    {
-        // Set Table Name
-        $this->tableName = $this->url[3];
-
-        // Set ID for Get Request
-        if (!empty($this->url[4])) {
-            $this->id = $this->url[4];
-        }
-
-        // Set Endpoint for Post, Put, Delete Requests
-        if (!empty($this->url[4]) && is_numeric($this->url[4]) === false) {
-            $this->endPoint = $this->url[4];
-        }
-    }
-
-    private function validateUrlGet()
-    {
-        if (!empty($this->url[2]) && $this->url[2] === $this->api && empty($this->url[4])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function getParameters()
-    {
-        if (strpos($_SERVER['REQUEST_URI'], "?") !== false) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function validateAnchor()
-    {
-        if (!empty($this->url[2]) && $this->url[2] === $this->api) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function validateUrlParametersGet()
-    {
-        if (!empty($this->url[4]) && $this->url[2] === $this->api && filter_var($this->url[4], FILTER_VALIDATE_INT)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private function buildQuery()
-    {
-        $string = "";
-        foreach ($_GET as $column => $filter) {
-            if (is_numeric($filter) === true) {
-                $string .= "$column = $filter AND ";
-            } else {
-                $string .= "$column = '$filter' AND ";
-            }
-        }
-        $this->query = preg_replace('/[^A-Za-z0-9\-=_ ]/', '', rtrim($string, " AND"));
-        $this->setTableName();
-    }
-
-    private function setTableName()
-    {
-        // TODO -- Remove key indexes, find a method
-        $url = explode("?", $_SERVER['REQUEST_URI'])[0];
-        $this->tableName = explode("/", $url)[3];
-    }
-
     private function get()
     {
         if ($this->validateUrlGet() === true && $this->getParameters() === false) {
@@ -145,10 +72,11 @@ class Api extends ApiUrlParser
 
         } elseif ($this->getParameters() === true) {
             header("Content-Type: application/json");
-            $this->buildQuery();
+            $query = $this->buildQuery();
+            $tableName = $this->extractTableNameFromGet();
             $this->db->select();
-            $this->db->from($this->tableName);
-            $this->db->where($this->query);
+            $this->db->from($tableName);
+            $this->db->where($query);
             $patterns = $this->db->get();
             print_r(json_encode($patterns));
         }
@@ -180,10 +108,4 @@ class Api extends ApiUrlParser
             $this->db->delete($this->tableName, "id = $id");
         }
     }
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
 }
-// TODO metodas key'ams
