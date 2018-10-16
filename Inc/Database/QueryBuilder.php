@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc;
+namespace Inc\Database;
 
 class QueryBuilder extends AbstractQueryBuilder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc;
+namespace Inc\Database;
 
 use PDO;
 use PDOException;
@@ -14,7 +14,7 @@ class Database extends QueryBuilder implements DatabaseInterface
 
     public function __construct()
     {
-        $db = require_once('Resources/Config.php');
+        $db = require_once('Inc/Resources/Config.php');
         $localhost = $db->localhost;
         $database = $db->database;
         $user = $db->user;
@@ -72,7 +72,6 @@ class Database extends QueryBuilder implements DatabaseInterface
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($data);
         $this->resetValues();
-        echo "Inserted";
     }
 
     public function get($select = null, $tableName = null, $parameter = null)
@@ -98,7 +97,6 @@ class Database extends QueryBuilder implements DatabaseInterface
         }
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
-        echo "Deleted";
     }
 
     public function update($tableName, $data, $where)
@@ -108,7 +106,6 @@ class Database extends QueryBuilder implements DatabaseInterface
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($data);
         $this->resetValues();
-        echo "Updated";
     }
 
     public function clear($tableName)
