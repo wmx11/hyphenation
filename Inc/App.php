@@ -2,136 +2,38 @@
 
 namespace Inc;
 
-use Inc\Helper\Timer;
-use Inc\PatternReader;
-//use Inc\Words;
 use Inc\Helper\Logger;
-use Inc\Helper\Cache;
-//use Inc\PatternReaderDb;
-use Inc\Database;
-//use Inc\HyphenationController;
-//use Inc\Api;
+use Inc\Helper\Timer;
+use Inc\Database\Database;
+use Inc\AppStrategy\AppStrategy;
 
 class App
 {
-    private $timer;
-    private $pattern;
-    private $words;
-    private $logger;
-    private $cache;
-    private $con;
-    private $db;
     private $api;
+    private $con;
+    private $timer;
+    private $logger;
 
     public function __construct()
     {
         $this->timer = new Timer();
-        $this->pattern = new ProxyPattern('Resources/pattern.txt');
-        $this->words = new Words();
-        $this->logger = new Logger();
-        $this->cache = new Cache('cache.txt');
-        $this->con = new Database();
-        $this->db = new HyphenationController($this->con);
-        $this->api = new Api($this->con);
+        $this->logger = Logger::init();
     }
 
     public function runApp()
     {
-        if (!empty($_SERVER['REQUEST_URI'])) {
+        if (empty($_SERVER['REQUEST_URI']) !== true) {
+            $this->con = new Database();
+            $this->api = new Api($this->con);
             $this->api->runApi();
         } else {
-            $startMsg = "################################ \r\n";
-            $startMsg .= "Welcome to the hyphenator! \r\n";
-            $startMsg .= "Here are the following functions: \r\n";
-            $startMsg .= "* hyphenate -file (Hyphenate words from a file) \r\n";
-            $startMsg .= "* hyphenate -db (Hyphenate words from a database) \r\n";
-            $startMsg .= "* hyphenate (Hyphenate a single word) \r\n";
-            $startMsg .= "* exit (Stop the app) \r\n";
-            $startMsg .= "Type help to display all functions \r\n";
-            $startMsg .= "################################ \r\n";
-
-            echo $startMsg;
-
-            $input = readline('What would you like to do?: ');
-
+            echo file_get_contents("Resources/StartMessage.txt") . "\r\n";
+            $input = readline("What would you like to do?: ");
             if (empty($input)) {
                 echo "Type help to display all functions \r\n";
             } else {
-                switch ($input) {
-                    case "hyphenate -file":
-                        $this->hyphenateFromFile();
-                        break;
-
-                    case "hyphenate -db":
-                        $this->hyphenateFromDb();
-                        break;
-
-                    case "hyphenate":
-                        $input = readline("Enter a word to hyphenate: ");
-                        $this->hyphenateWord($input);
-                        break;
-
-                    case "exit":
-                        die();
-                        break;
-
-                    default:
-                        echo "Type help to display all functions \r\n";
-                        break;
-                }
+                $app = new AppStrategy($input);
             }
-        }
-    }
-
-    public function hyphenateFromFile()
-    {
-        $wordsFile = file('Resources/test.txt');
-        foreach ($wordsFile as $item) {
-            if ($this->cache->get(trim($item)) !== false) {
-                echo $this->cache->get(trim($item)) . "\r\n";
-            } else {
-                $this->words->setWord(trim($item));
-                $this->words->findPatternPositionInWord($this->pattern->getPatternsWithoutNumbers(), $this->words->getWord(), $this->pattern->getPatterns());
-                $this->words->findNumberPositionInPattern($this->pattern->getPatternsWithoutCharacters());
-                $this->words->hyphenate();
-                echo $item . " " . $this->words->getHyphenatedWord() . "\r\n";
-                $this->cache->set(trim($item), trim($this->words->getHyphenatedWord()));
-            }
-        }
-    }
-
-    public function hyphenateFromDb()
-    {
-        $dbWords = $this->db->returnWords();
-        $dbPatterns = $this->db->returnPatterns();
-        $patternsDb = new PatternReaderDb($dbPatterns);
-        foreach ($dbWords as $id => $word) {
-            if ($this->db->ifWordExists($id) === false) {
-                $this->words->setWord($word);
-                $this->words->findPatternPositionInWord($patternsDb->getPatternsWithoutNumbers(), $this->words->getWord(), $patternsDb->getPatterns());
-                $this->db->insertFoundPatterns($id, $this->words->getPatternPositionInWord());
-                $this->words->findNumberPositionInPattern($patternsDb->getPatternsWithoutCharacters());
-                $this->words->hyphenate();
-                echo $this->words->getHyphenatedWord() . "\r\n";
-                $data = ['word_id' => $id, 'hyphenated_word' => $this->words->getHyphenatedWord()];
-                $this->db->insertHyphenatedWord($id, $this->words->getHyphenatedWord(), $data);
-            } else {
-                $this->db->ifWordExists($id);
-            }
-        }
-    }
-
-    public function hyphenateWord($input)
-    {
-        if ($this->cache->get(trim($input)) !== false) {
-            echo $this->cache->get(trim($input)) . "\r\n";
-        } else {
-            $this->words->setWord(trim($input));
-            $this->words->findPatternPositionInWord($this->pattern->getPatternsWithoutNumbers(), $this->words->getWord(), $this->pattern->getPatterns());
-            $this->words->findNumberPositionInPattern($this->pattern->getPatternsWithoutCharacters());
-            $this->words->hyphenate();
-            echo $input . " " . $this->words->getHyphenatedWord() . "\r\n";
-            $this->cache->set(trim($input), trim($this->words->getHyphenatedWord()));
         }
     }
 
@@ -145,10 +47,5 @@ class App
     {
         $this->logger->logTime($this->timer->getTimeElapsed() . "\r\n");
         $this->logger->log("Items Cached: " . $this->cache->getNewCachedItems(), "Words Hyphenated: " . $this->words->getWordCount());
-    }
-
-    public function returnDb()
-    {
-        return $this->db;
     }
 }
