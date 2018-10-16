@@ -6,10 +6,18 @@ use Psr\Log\AbstractLogger;
 
 class Logger extends AbstractLogger
 {
-
     private $log;
 
-    public function __construct()
+    public static function init()
+    {
+        $logger = null;
+        if ($logger === null) {
+            $logger = new Logger();
+        }
+        return $logger;
+    }
+
+    private function __construct()
     {
         $this->log = fopen( 'logger.txt', 'a');
     }
