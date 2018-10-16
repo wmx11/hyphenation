@@ -2,28 +2,24 @@
 
 namespace Inc;
 
-class PatternReader implements PatternsInterface
+class PatternReaderDb
 {
-    private $patterns;
-    private $patternWithoutNumbers = [];
-    private $patternWithoutCharacters = [];
+    private $patterns = array ();
+    private $patternWithoutNumbers = array ();
+    private $patternWithoutCharacters = array ();
 
-    public function __construct($fileLocation)
+    public function __construct($dbArray)
     {
-        $input = $this->readFile($fileLocation);
-        $this->setPattern($input);
+        $this->setPattern($dbArray);
         $this->setPatternsWithoutNumbers();
         $this->setPatternsWithoutLetters();
     }
 
-    public function readFile($fileLocation)
-    {
-        return file($fileLocation);
-    }
-
     private function setPattern($input)
     {
-        $this->patterns = $input;
+        foreach ($input as $index => $pattern) {
+            $this->patterns[$index] = $pattern;
+        }
     }
 
     private function setPatternsWithoutNumbers()
@@ -56,5 +52,3 @@ class PatternReader implements PatternsInterface
         return $this->patternWithoutCharacters;
     }
 }
-
-?>

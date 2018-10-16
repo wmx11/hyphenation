@@ -14,7 +14,7 @@ class Database extends QueryBuilder implements DatabaseInterface
 
     public function __construct()
     {
-        $db = require_once('Config.php');
+        $db = require_once('Resources/Config.php');
         $localhost = $db->localhost;
         $database = $db->database;
         $user = $db->user;

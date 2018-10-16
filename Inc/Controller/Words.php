@@ -2,16 +2,16 @@
 
 namespace Inc;
 
-class Words implements WordsInterface
+class Words extends AbstractWordsParser implements WordsInterface
 {
     private $word;
     private $wordLength;
     private $wordLettersArray;
     private $wordLengthArrayEmpty;
-    private $matchedArray = [];
-    private $patternPositionInWord = [];
-    const ODD_NUMBERS = [1, 3, 5, 7, 9];
-    const EVEN_NUMBERS = [0, 2, 4, 6, 8];
+    private $matchedArray = array ();
+    private $patternPositionInWord = array ();
+    const ODD_NUMBERS = array (1, 3, 5, 7, 9);
+    const EVEN_NUMBERS = array (0, 2, 4, 6, 8);
     private $hyphenateWord = "";
     private $wordCount = 0;
 
@@ -37,19 +37,19 @@ class Words implements WordsInterface
     }
 
 
-    private function setWordLength($input)
+    public function setWordLength($input)
     {
         $input = $this->word;
         $this->wordLength = strlen($input);
     }
 
-    private function setWordLettersArray($input)
+    public function setWordLettersArray($input)
     {
         $input = $this->word;
         $this->wordLettersArray = str_split($input);
     }
 
-    private function setWordLengthArrayEmpty()
+    public function setWordLengthArrayEmpty()
     {
         $this->wordLengthArrayEmpty = array_fill(0, $this->wordLength, null);
     }

@@ -2,6 +2,9 @@
 
 namespace Inc;
 
+use Inc\Controller\PatternsInterface;
+use Inc\Controller\PatternReader;
+
 class ProxyPattern implements PatternsInterface
 {
     private $fileLocation;

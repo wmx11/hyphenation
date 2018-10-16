@@ -5,9 +5,9 @@ namespace Inc;
 class HyphenationController
 {
     private $con;
-    private $words = [];
-    private $patterns = [];
-    private $hyphenatedWords = [];
+    private $words = array ();
+    private $patterns = array ();
+    private $hyphenatedWords = array ();
 
     public function __construct($db)
     {
@@ -37,7 +37,7 @@ class HyphenationController
     public function insertFoundPatterns($wordId, $foundPatterns)
     {
         if (empty($this->hyphenatedWords[$wordId])) {
-            $patternId = [];
+            $patternId = array ();
             foreach ($foundPatterns as $positionInWord => $pattern) {
                 foreach ($pattern as $patternIndex => $patternValue) {
                     $patternId[] = $patternIndex;
@@ -45,10 +45,10 @@ class HyphenationController
             }
 
             foreach ($patternId as $foundPatternId) {
-                $data = [
+                $data = array (
                     'word_id' => $wordId,
                     'pattern_id' => $foundPatternId
-                ];
+            );
                 $this->con->insert('word_pattern_relation', $data);
             }
         }
@@ -105,10 +105,11 @@ class HyphenationController
     public function insertTransaction()
     {
         try {
-            $data = [
+            $data = array (
                 'word_id' => 666,
                 'hyphenated_word' => 'ba-na-na-na-na'
-            ];
+            );
+
             $this->con->beginTransaction();
             $this->con->insert('hyphenated_words', $data);
             $this->con->commit();
