@@ -1,6 +1,6 @@
 <?php
 
-namespace Inc;
+namespace Inc\Model;
 
 use Inc\Controller\PatternsInterface;
 use Inc\Controller\PatternReader;
