@@ -1,0 +1,9 @@
+################################
+Welcome to the hyphenator!
+Here are the following functions:
+* hyphenate -file (Hyphenate words from a file)
+* hyphenate -db (Hyphenate words from a database)
+* hyphenate (Hyphenate a single word)
+* exit (Stop the app)
+Type help to display all functions
+################################
