@@ -18,7 +18,7 @@ class ProxyPattern implements PatternsInterface
     public function readFile($fileLocation)
     {
         if ($this->patterns === null) {
-            $this->patterns = new PatternReader($this->fileLocation);
+            return $this->patterns = new PatternReader($this->fileLocation);
         }
     }
 }

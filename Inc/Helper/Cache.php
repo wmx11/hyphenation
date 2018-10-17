@@ -8,8 +8,8 @@ class Cache implements CacheInterface
 {
     private $cacheName;
     private $cacheFile;
-    private $cacheArray = [];
-    private $itemsToCache = [];
+    private $cacheArray = array ();
+    private $itemsToCache = array ();
 
     public function __construct($name)
     {
@@ -59,7 +59,7 @@ class Cache implements CacheInterface
 
     public function get($key, $default = null)
     {
-        if (!empty($this->cacheArray[$key])) {
+        if (empty($this->cacheArray[$key]) !== true) {
             return $this->cacheArray[$key];
         } else {
             return false;
