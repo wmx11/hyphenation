@@ -6,11 +6,26 @@ class Uri
 {
     private $uri;
     private $url;
+    private $path;
+
+    public function setUriParameters()
+    {
+        $this->setPath();
+        $this->setUrl();
+        $this->setUri();
+    }
+
+    public function setPath()
+    {
+        if (empty($_SERVER['REQUEST_URI']) !== true) {
+            $this->path = $_SERVER['REQUEST_URI'];
+        }
+    }
 
     public function setUri()
     {
-        if (!empty($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], "?") === false) {
-            return $this->uri = explode("/", $_SERVER['REQUEST_URI']);
+        if (!empty($this->path) && strpos($this->path, "?") === false) {
+            return $this->uri = explode("/", $this->path);
         } else {
             return false;
         }
@@ -18,16 +33,9 @@ class Uri
 
     public function setUrl()
     {
-        if (empty($_SERVER['REQUEST_URI']) !== true) {
-            $url = $_SERVER['REQUEST_URI'];
-            $this->url = $url;
+        if (empty($this->path) !== true) {
+            $this->url = $this->path;
         }
-    }
-
-    public function setUriParameters()
-    {
-        $this->setUrl();
-        $this->setUri();
     }
 
     public function segment($position)
