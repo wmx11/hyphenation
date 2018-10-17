@@ -4,5 +4,5 @@ namespace Inc\AppStrategy;
 
 interface AppStrategyInterface
 {
-    public function hyphenate($input = null);
+    public function hyphenate($container, $input = null);
 }

@@ -6,9 +6,11 @@ class AppStrategy
 {
     private $app = null;
 
-    public function __construct($input)
+    public function __construct($input, $container)
     {
         $word = null;
+        $classInjection = $container;
+
         switch ($input) {
             case "hyphenate -file":
                 $this->app = new HyphenateFromFile();
@@ -20,7 +22,7 @@ class AppStrategy
 
             case "hyphenate":
                 $word = readline("Enter a word to hyphenate: ");
-                $this->app = new HyphenateWord($word);
+                $this->app = new HyphenateWord();
                 break;
 
             case "exit":
@@ -28,9 +30,9 @@ class AppStrategy
                 break;
 
             default:
-                echo "Type help to display all functions \r\n";
+                return;
                 break;
         }
-        $this->app->hyphenate($word);
+        $this->app->hyphenate($classInjection, $word);
     }
 }
