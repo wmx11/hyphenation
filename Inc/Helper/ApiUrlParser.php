@@ -7,21 +7,25 @@ use Inc\Model\Uri;
 class ApiUrlParser extends Uri
 {
     private $api = "api";
+    const HOOK = 2;
+    const TABLENAME = 3;
+    const ENDPOINT = 4;
+    const BEFORE_QUERY = 0;
 
     public function setTableNameInitial()
     {
-        return $this->segment(3);
+        return $this->segment(self::TABLENAME);
     }
 
     public function setId()
     {
-        return $this->segment(4);
+        return $this->segment(self::ENDPOINT);
     }
 
     public function setEndpoint()
     {
-        if (is_numeric($this->segment(4)) === false) {
-            return $this->segment(4);
+        if (is_numeric($this->segment(self::ENDPOINT)) === false) {
+            return $this->segment(self::ENDPOINT);
         }
     }
 
@@ -29,15 +33,15 @@ class ApiUrlParser extends Uri
     {
         $url = $this->getUrl();
         if (strpos($url, "?") !== false) {
-            $url_path = explode("?", $url)[0];
-            $tableName = explode('/', $url_path)[3];
+            $url_path = explode("?", $url)[self::BEFORE_QUERY];
+            $tableName = explode('/', $url_path)[self::TABLENAME];
             return $tableName;
         }
     }
 
     public function validateUrlGet()
     {
-        if ($this->segment(2) === $this->api && empty($this->segment(4)) === true) {
+        if ($this->segment(self::HOOK) === $this->api && empty($this->segment(self::ENDPOINT)) === true) {
             return true;
         } else {
             return false;
@@ -55,7 +59,7 @@ class ApiUrlParser extends Uri
 
     public function validateAnchor()
     {
-        if ($this->segment(2) === $this->api) {
+        if ($this->segment(self::HOOK) === $this->api) {
             return true;
         } else {
             return false;
@@ -64,7 +68,7 @@ class ApiUrlParser extends Uri
 
     public function validateUrlParametersGet()
     {
-        if ($this->segment(2) === $this->api && filter_var($this->segment(4), FILTER_VALIDATE_INT)) {
+        if ($this->segment(self::HOOK) === $this->api && filter_var($this->segment(self::ENDPOINT), FILTER_VALIDATE_INT)) {
             return true;
         } else {
             return false;
