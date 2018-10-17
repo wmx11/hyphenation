@@ -4,7 +4,7 @@ namespace Inc\Database;
 
 class QueryBuilder extends AbstractQueryBuilder
 {
-    private $query = array();
+    private $query = [];
 
     public function select($select = "*")
     {
