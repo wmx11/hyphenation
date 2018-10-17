@@ -4,9 +4,9 @@ namespace Inc\Controller;
 
 class PatternReader implements PatternsInterface
 {
-    private $patterns = array ();
-    private $patternWithoutNumbers = array ();
-    private $patternWithoutCharacters = array ();
+    private $patterns = [];
+    private $patternWithoutNumbers = [];
+    private $patternWithoutCharacters = [];
 
     public function __construct($fileLocation)
     {
@@ -18,7 +18,11 @@ class PatternReader implements PatternsInterface
 
     public function readFile($fileLocation)
     {
-        return file($fileLocation);
+        if (is_string($fileLocation) === true && file_exists($fileLocation) === true) {
+            return file($fileLocation);
+        } elseif (is_array($fileLocation) === true) {
+            return $fileLocation;
+        }
     }
 
     private function setPattern($input)

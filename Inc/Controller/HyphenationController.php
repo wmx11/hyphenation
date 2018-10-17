@@ -5,9 +5,9 @@ namespace Inc\Controller;
 class HyphenationController
 {
     private $con;
-    private $words = array ();
-    private $patterns = array ();
-    private $hyphenatedWords = array ();
+    private $words = [];
+    private $patterns = [];
+    private $hyphenatedWords = [];
 
     public function __construct($db)
     {
@@ -65,7 +65,7 @@ class HyphenationController
 
     public function getWordsFromDb()
     {
-        $stmt = $this->con->get('*', 'words', 'order by id asc limit 135');
+        $stmt = $this->con->get('*', 'words', 'order by id asc limit 138');
         foreach ($stmt as $id => $row) {
             $this->words[trim($row['id'])] = trim($row['word']);
         }
@@ -106,10 +106,10 @@ class HyphenationController
     public function insertTransaction()
     {
         try {
-            $data = array (
+            $data = [
                 'word_id' => 666,
                 'hyphenated_word' => 'ba-na-na-na-na'
-            );
+            ];
 
             $this->con->beginTransaction();
             $this->con->insert('hyphenated_words', $data);

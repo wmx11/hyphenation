@@ -2,26 +2,38 @@
 
 namespace Inc\Controller;
 
+use Inc\Model\ProxyPattern;
+
 class Words extends AbstractWordsParser implements WordsInterface
 {
     private $word;
+    private $patterns;
     private $wordLength;
     private $wordLettersArray;
     private $wordLengthArrayEmpty;
-    private $matchedArray = array ();
-    private $patternPositionInWord = array ();
-    private $oddNumbers = array (1, 3, 5, 7, 9);
-    private $evenNumbers = array (0, 2, 4, 6, 8);
+    private $matchedArray = [];
+    private $patternPositionInWord = [];
+    private $oddNumbers = [1, 3, 5, 7, 9];
+    private $evenNumbers = [0, 2, 4, 6, 8];
     private $hyphenateWord = "";
     private $wordCount = 0;
+
+    public function __construct($fileLocation)
+    {
+        $patterns = new ProxyPattern($fileLocation);
+        $this->patterns = $patterns->readFile($patterns);
+    }
 
     public function __destruct()
     {
         $this->wordCount = 0;
     }
 
-    public function hyphenate()
+    public function hyphenate($input)
     {
+        $this->setWord($input);
+        $this->findPatternPositionInWord($this->patterns->getPatternsWithoutNumbers(), $this->getWord(), $this->patterns->getPatterns());
+        $this->findNumberPositionInPattern($this->patterns->getPatternsWithoutCharacters());
         $this->findNumberPositionInWord($this->patternPositionInWord);
         $this->addNumbersAndLetters($this->wordLettersArray, $this->wordLengthArrayEmpty);
         $this->cleanWord($this->matchedArray);
