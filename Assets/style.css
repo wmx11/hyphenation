@@ -1,0 +1,125 @@
+html, body {
+    margin:0;
+    height:100%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+
+.sidebar {
+    background:#fbfbfb;
+    height:100%;
+    width:30%;
+    float:left;
+    display:block;
+    position:fixed;
+    border-right:1px solid #d0d0d0;
+    box-shadow: 2px 0px 10px rgba(0,0,0,0.1);
+}
+
+.results {
+    background:#ffffff;
+    height:100%;
+    display:block;
+    margin-left:570px;
+}
+
+.wrapper {
+    display:block;
+    margin:auto;
+}
+
+.formWrapper {
+    display:flex;
+    margin:auto;
+}
+
+.header h1 {
+    display:block;
+    text-align:center;
+    font-weight: 200;
+    margin:auto;
+    padding:20px;
+    border-bottom:1px solid #d0d0d0;
+}
+
+.showResult {
+    padding:20px;
+    background:#fbfbfb;
+    display:flex;
+    margin-bottom:10px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.edit, .delete {
+    margin-right:30px;
+    text-align:left;
+}
+
+.edit a , .delete a {
+    text-decoration: none;
+    color:white;
+}
+
+.edit {
+    background:#2a9ca5;
+    padding:5px 10px 5px 10px;
+    border-radius:5px;
+}
+
+.delete {
+    background:#f94949;
+    padding:5px 10px 5px 10px;
+    border-radius:5px;
+}
+
+.result {
+    width:200px;
+}
+
+form, input {
+    float:none;
+    display:block;
+    padding:5px;
+    margin:10px auto 10px auto;
+}
+
+input[type=text] {
+    border-radius:5px;
+    box-shadow:none;
+    padding:10px;
+    width:100%;
+    border:1px solid #d0d0d0;
+}
+
+input[type=submit] {
+    border-radius:5px;
+    padding:10px 15px 10px 15px;
+    background: #76b0ff;
+    width:50%;
+    border: none;
+    color:white;
+}
+
+label {
+    margin:auto;
+    display:block;
+    text-align:center;
+}
+
+.methods {
+    border-bottom:1px solid #efefef;
+    background:white;
+    display:flex;
+    padding:20px;
+    height:4%;
+}
+
+.tag {
+    margin:auto;
+    transition: 0.5s;
+}
+
+.tag:hover {
+    transition:0.5s;
+    font-size:18px;
+}
