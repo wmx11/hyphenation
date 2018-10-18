@@ -9,3 +9,4 @@ use Inc\App;
 $container = new Injector();
 $app = new App($container);
 $app->runApp();
+
