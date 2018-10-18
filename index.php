@@ -1,5 +1,5 @@
 <?php
-include('Inc/Resources/Autoload.php');
+include $_SERVER['DOCUMENT_ROOT'] . "/Inc/Resources/Autoload.php";
 $controller = new Controller\Controller();
 $controller->index();
 $model = new Model\Model;
@@ -8,7 +8,7 @@ $words = $model->getAllWords();
 <div class="results">
     <div class="wrapper">
         <div class="header">
-            <h1>Showing: %Words%</h1>
+            <h1>Showing: <a href="Views/Words.php">Words</a></h1>
         </div>
         <?php foreach ($words as $row): ?>
         <div class="showResult">

@@ -18,7 +18,7 @@ class Model
         $this->con->select('*');
         $this->con->from('words');
         $this->con->orderBy('id', 'asc');
-        $this->con->limit(20);
+        $this->con->limit(10);
         return $this->con->get();
     }
 }

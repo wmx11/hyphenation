@@ -1,14 +1,7 @@
 <div class="sidebar">
     <div class="methods">
-        <div class="tag">Display All</div>
-        <div class="tag">Add New</div>
+        <div class="tag"><a href="index.php">Home</a></div>
+        <div class="tag"><a href="index.php?addnew">Add New</a></div>
+        <div class="tag"><a href="Words.php">All Words</a></div>
+        <div class="tag"><a href="../Patterns.php">All Patterns</a></div>
     </div>
-
-    <div class="formWrapper">
-        <form action="" method="post">
-            <label for="">Add New Word</label>
-            <input type="text" placeholder="New Word">
-            <input type="submit">
-        </form>
-    </div>
-</div>
