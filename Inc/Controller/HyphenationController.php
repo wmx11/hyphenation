@@ -2,6 +2,8 @@
 
 namespace Inc\Controller;
 
+use Inc\Database\Database;
+
 class HyphenationController
 {
     private $con;
@@ -9,7 +11,7 @@ class HyphenationController
     private $patterns = [];
     private $hyphenatedWords = [];
 
-    public function __construct($db)
+    public function __construct(Database $db)
     {
         $this->con = $db;
         $this->getWordsFromDb();
