@@ -2,9 +2,14 @@
 
 namespace Inc;
 
+use \ReflectionClass;
+
 class Injector
 {
     private $container = [];
+    private $dependency;
+    const CLASSNAME = 0;
+    const DEPENDENCY = 1;
 
     public function __construct()
     {
@@ -18,20 +23,32 @@ class Injector
 
     public function buildContainer()
     {
-        $this->setClass('Api','Inc\Api', 'Inc\Database\Database');
+        $this->setClass('Api','Inc\Api');
         $this->setClass('Timer', 'Inc\Helper\Timer');
-        $this->setClass('Cache', 'Inc\Helper\Cache',null,'cache.txt');
-        $this->setClass('HyphenationController', 'Inc\Controller\HyphenationController', 'Inc\Database\Database');
+        $this->setClass('Cache', 'Inc\Helper\Cache','cache.txt');
+        $this->setClass('HyphenationController', 'Inc\Controller\HyphenationController');
     }
 
-    public function setClass($name, $location, $dependency = null, $filepath = null)
+    public function setClass($name, $nameSpace, $filepath = null)
     {
-        if ($dependency === null && $filepath === null) {
-            $this->container[$name] = [$name => $location];
-        } elseif ($dependency === null && $filepath !== null) {
-            $this->container[$name] = [$name => $location . " " . $filepath];
+        $this->getDependency($nameSpace);
+        if ($this->dependency === null && $filepath === null) {
+            $this->container[$name] = [$name => $nameSpace];
+        } elseif ($this->dependency === null && $filepath !== null) {
+            $this->container[$name] = [$name => $nameSpace . " " . $filepath];
+        } elseif ($this->dependency !== null && $filepath === null) {
+            $this->container[$name] = [$name => $nameSpace . " " . $this->dependency];
+        }
+    }
+
+    public function getDependency($class)
+    {
+        $reflector = new ReflectionClass($class);
+        $dependencyClass = $reflector->getConstructor()->getParameters();
+        if (!empty($dependencyClass) && !empty($dependencyClass[self::CLASSNAME]->getClass()->name)) {
+            return $this->dependency = $dependencyClass[self::CLASSNAME]->getClass()->name;
         } else {
-            $this->container[$name] = [$name => $location . " " . $dependency];
+            return $this->dependency = null;
         }
     }
 
@@ -42,14 +59,14 @@ class Injector
 
     public function inject($class)
     {
-        $string = $this->container[$class][$class];
-        $object = explode(" ", $string);
-        if (empty($object[0]) !== true && empty($object[1]) === true) {
-            return new $object[0];
-        } elseif (empty($object[1]) !== true && class_exists($object[1]) === true) {
-            return new $object[0](new $object[1]);
-        } elseif (empty($object[1]) !== true && file_exists($object[1]) === true) {
-            return new $object[0]($object[1]);
+        $classname = $this->container[$class][$class];
+        $object = explode(" ", $classname);
+        if (empty($object[self::CLASSNAME]) !== true && empty($object[self::DEPENDENCY]) === true) {
+            return new $object[self::CLASSNAME];
+        } elseif (empty($object[self::DEPENDENCY]) !== true && class_exists($object[self::DEPENDENCY]) === true) {
+            return new $object[self::CLASSNAME](new $object[self::DEPENDENCY]);
+        } elseif (empty($object[self::DEPENDENCY]) !== true && file_exists($object[self::DEPENDENCY]) === true) {
+            return new $object[self::CLASSNAME]($object[self::DEPENDENCY]);
         }
     }
 }
