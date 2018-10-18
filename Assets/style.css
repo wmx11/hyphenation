@@ -73,7 +73,7 @@ html, body {
 }
 
 .result {
-    width:200px;
+    width:350px;
 }
 
 form, input {
@@ -101,7 +101,7 @@ input[type=submit] {
 }
 
 label {
-    margin:auto;
+    margin:auto auto 10px auto;
     display:block;
     text-align:center;
 }
@@ -119,7 +119,22 @@ label {
     transition: 0.5s;
 }
 
+.tag a {
+    text-decoration: none;
+    color:black;
+}
+
 .tag:hover {
     transition:0.5s;
-    font-size:18px;
+    font-size:16.5px;
+}
+
+select {
+    border-radius:5px;
+    box-shadow:none;
+    padding:10px;
+    width:100%;
+    border:1px solid #d0d0d0;
+    background:white;
+    color:black;
 }
