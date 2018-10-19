@@ -30,10 +30,10 @@ class QueryBuilder extends AbstractQueryBuilder
         }
     }
 
-    public function limit($limit = null)
+    public function limit($limit = null, $limit2 = null)
     {
         if ($limit !== null) {
-            return $this->query[] = " LIMIT $limit";
+            return $this->query[] = " LIMIT $limit $limit2";
         }
     }
 
