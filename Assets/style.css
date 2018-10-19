@@ -8,7 +8,7 @@ html, body {
 .sidebar {
     background:#fbfbfb;
     height:100%;
-    width:30%;
+    width:570px;
     float:left;
     display:block;
     position:fixed;
@@ -29,8 +29,9 @@ html, body {
 }
 
 .formWrapper {
-    display:flex;
+    display:none;
     margin:auto;
+    transition:0.5s;
 }
 
 .header h1 {
@@ -81,6 +82,7 @@ form, input {
     display:block;
     padding:5px;
     margin:10px auto 10px auto;
+    width:50%;
 }
 
 input[type=text] {
