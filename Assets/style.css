@@ -1,158 +1,178 @@
 html, body {
-    margin:0;
-    height:100%;
+    margin: 0;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
 }
 
 .sidebar {
-    background:#fbfbfb;
-    height:100%;
-    width:570px;
-    float:left;
-    display:block;
-    position:fixed;
-    border-right:1px solid #d0d0d0;
-    box-shadow: 2px 0px 10px rgba(0,0,0,0.1);
+    background: #fbfbfb;
+    height: 100%;
+    width: 570px;
+    float: left;
+    display: block;
+    position: fixed;
+    border-right: 1px solid #d0d0d0;
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 .results {
-    background:#ffffff;
-    height:100%;
-    display:block;
-    margin-left:570px;
+    background: #ffffff;
+    height: 100%;
+    display: block;
+    margin-left: 570px;
 }
 
 .wrapper {
-    display:block;
-    margin:auto;
+    display: block;
+    margin: auto;
 }
 
 .formWrapper {
-    display:none;
-    margin:auto;
-    transition:0.5s;
+    display: none;
+    margin: auto;
+    transition: 0.5s;
 }
 
 .header h1 {
-    display:block;
-    text-align:center;
+    display: block;
+    text-align: center;
     font-weight: 200;
-    margin:auto;
-    padding:20px;
-    border-bottom:1px solid #d0d0d0;
+    margin: auto;
+    padding: 20px;
+    border-bottom: 1px solid #d0d0d0;
 }
 
 .showResultPattern, .showResultWord {
-    padding:20px;
-    background:#fbfbfb;
-    display:flex;
-    margin-bottom:10px;
+    padding: 20px;
+    background: #fbfbfb;
+    display: flex;
+    margin-bottom: 10px;
     border-bottom: 1px solid #d0d0d0;
 }
 
 .edit, .delete {
-    margin-right:30px;
-    text-align:left;
+    margin-right: 30px;
+    text-align: left;
 }
 
-.edit a , .delete a {
+.edit a, .delete a {
     text-decoration: none;
-    color:white;
-    font-weight:600;
+    color: white;
+    font-weight: 600;
 }
 
 .edit {
-    background:#2a9ca5;
-    padding:5px 10px 5px 10px;
-    border-radius:5px;
+    background: #2a9ca5;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
 }
 
 .delete {
-    background:#f94949;
-    padding:5px 10px 5px 10px;
-    border-radius:5px;
+    background: #f94949;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
 }
 
 .result {
-    width:350px;
+    width: 350px;
 }
 
 form, input {
-    float:none;
-    display:block;
-    padding:5px;
-    margin:10px auto 10px auto;
-    width:50%;
+    float: none;
+    display: block;
+    padding: 5px;
+    margin: 10px auto 10px auto;
+    width: 50%;
 }
 
 input[type=text] {
-    border-radius:5px;
-    box-shadow:none;
-    padding:10px;
-    width:100%;
-    border:1px solid #d0d0d0;
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #d0d0d0;
 }
 
 input[type=submit] {
-    border-radius:5px;
-    padding:10px 15px 10px 15px;
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
     background: #76b0ff;
-    width:50%;
+    width: 50%;
     border: none;
-    color:white;
+    color: white;
 }
 
 label {
-    margin:auto auto 10px auto;
-    display:block;
-    text-align:center;
+    margin: auto auto 10px auto;
+    display: block;
+    text-align: center;
 }
 
 .methods {
-    border-bottom:1px solid #efefef;
-    background:white;
-    display:flex;
-    padding:20px;
-    height:4%;
+    border-bottom: 1px solid #efefef;
+    background: white;
+    display: flex;
+    padding: 20px;
+    height: 4%;
 }
 
 .tag {
-    margin:auto;
+    margin: auto;
     transition: 0.5s;
 }
 
 .tag a {
     text-decoration: none;
-    color:black;
+    color: black;
 }
 
 .tag:hover {
-    transition:0.5s;
-    font-size:16.5px;
+    transition: 0.5s;
+    font-size: 16.5px;
 }
 
 select {
-    border-radius:5px;
-    box-shadow:none;
-    padding:10px;
-    width:100%;
-    border:1px solid #d0d0d0;
-    background:white;
-    color:black;
+    border-radius: 5px;
+    box-shadow: none;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #d0d0d0;
+    background: white;
+    color: black;
 }
 
 #editPopup {
-    position:absolute;
-    background:rgba(0,0,0,0.5);
-    display:none;
-    height:100%;
-    width:100%;
-    top:0;
-    left:0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .updateWrapper {
-    margin:auto;
-    width:500px;
+    margin: auto;
+    width: 500px;
+}
+
+.pagination {
+    margin: auto;
+    display: block;
+    font-size: 20px;
+}
+
+.previous {
+    float: left;
+    margin-left: 20px;
+}
+
+.next {
+    float: right;
+    margin-right: 20px;
+}
+
+.previous a, .next a {
+    text-decoration: none;
 }
