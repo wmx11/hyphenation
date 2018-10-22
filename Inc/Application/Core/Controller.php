@@ -66,7 +66,7 @@ class Controller
         $callClass = $this->callClass;
         if (class_exists($class) === true && $callClass === null) {
             return $this->callClass = new $class();
-        }  else {
+        } else {
             echo "Page Not Found";
         }
     }
