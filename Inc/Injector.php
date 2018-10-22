@@ -23,9 +23,9 @@ class Injector
 
     public function buildContainer()
     {
-        $this->setClass('Api','Inc\Api');
+        $this->setClass('Api', 'Inc\Api');
         $this->setClass('Timer', 'Inc\Helper\Timer');
-        $this->setClass('Cache', 'Inc\Helper\Cache','cache.txt');
+        $this->setClass('Cache', 'Inc\Helper\Cache', 'cache.txt');
         $this->setClass('HyphenationController', 'Inc\Controller\HyphenationController');
     }
 
