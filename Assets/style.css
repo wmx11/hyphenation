@@ -43,7 +43,7 @@ html, body {
     border-bottom:1px solid #d0d0d0;
 }
 
-.showResult {
+.showResultPattern, .showResultWord {
     padding:20px;
     background:#fbfbfb;
     display:flex;
@@ -59,6 +59,7 @@ html, body {
 .edit a , .delete a {
     text-decoration: none;
     color:white;
+    font-weight:600;
 }
 
 .edit {
@@ -139,4 +140,19 @@ select {
     border:1px solid #d0d0d0;
     background:white;
     color:black;
+}
+
+#editPopup {
+    position:absolute;
+    background:rgba(0,0,0,0.5);
+    display:none;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+}
+
+.updateWrapper {
+    margin:auto;
+    width:500px;
 }
