@@ -84,7 +84,7 @@ class Controller
 
     public function loadView($viewName, $data = [])
     {
-        $path = "Inc/Application/View/$viewName.php";
+        $path = "Inc/Application/View/$viewName.phtml";
         if (is_file($path) === true) {
             ob_start();
             extract($data);
