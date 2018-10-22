@@ -8,10 +8,15 @@ class WordsModel extends Model
 {
     public function getWords()
     {
+        $itemsPerPage = 10;
+        $limit = 0;
+        if (!empty(explode("/", $_SERVER['REQUEST_URI'])[3])) {
+            $limit = explode("/", $_SERVER['REQUEST_URI'])[3];
+        }
         $this->con->select('*');
         $this->con->from('words');
         $this->con->orderBy('id', 'desc');
-        $this->con->limit(10);
+        $this->con->limit("$limit, $itemsPerPage");
         return $this->con->get();
     }
 
@@ -28,7 +33,7 @@ class WordsModel extends Model
 
     public function deleteWord($word)
     {
-        $deleteWord = '"'.trim($word).'"';
+        $deleteWord = '"' . trim($word) . '"';
         $this->con->delete('words', "word = $deleteWord");
     }
 

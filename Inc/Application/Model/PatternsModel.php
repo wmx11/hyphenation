@@ -8,10 +8,15 @@ class PatternsModel extends Model
 {
     public function getPatterns()
     {
+        $itemsPerPage = 10;
+        $limit = 0;
+        if (!empty(explode("/", $_SERVER['REQUEST_URI'])[3])) {
+            $limit = explode("/", $_SERVER['REQUEST_URI'])[3];
+        }
         $this->con->select('*');
         $this->con->from('patterns');
-        $this->con->orderBy('id', 'desc');
-        $this->con->limit(10);
+        $this->con->orderBy('id', 'asc');
+        $this->con->limit("$limit, $itemsPerPage");
         return $this->con->get();
     }
 
@@ -30,14 +35,14 @@ class PatternsModel extends Model
 
     public function deletePattern($pattern)
     {
-        $deletePattern = '"'.trim($pattern).'"';
+        $deletePattern = '"' . trim($pattern) . '"';
         $this->con->delete('patterns', "pattern = $deletePattern");
     }
 
     public function editPattern($pattern, $editValue)
     {
         $data = ["pattern" => trim($editValue)];
-        $updatePattern = '"'.trim($pattern).'"';
+        $updatePattern = '"' . trim($pattern) . '"';
         $this->con->update('patterns', $data, "pattern = $updatePattern");
     }
 }
