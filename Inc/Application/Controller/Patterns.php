@@ -21,8 +21,22 @@ class Patterns extends Controller
         echo $this->loadView('head');
         echo $this->loadView('sidebar');
         echo $this->loadView('submitForm');
+        echo $this->loadView('editPopup');
         echo $this->loadView('patterns', $patterns);
         echo $this->loadView('footer');
+    }
+
+    public function delete()
+    {
+        $pattern = $_POST['pattern'];
+        $this->model->deletePattern($pattern);
+    }
+
+    public function edit()
+    {
+        $pattern = $_POST['pattern'];
+        $editValue = $_POST['editedPattern'];
+        $this->model->editPattern($pattern, $editValue);
     }
 
 }

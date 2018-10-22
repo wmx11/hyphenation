@@ -20,6 +20,7 @@ class Words extends Controller
         echo $this->loadView('head');
         echo $this->loadView('sidebar');
         echo $this->loadView('submitForm');
+        echo $this->loadView('editPopup');
         echo $this->loadView('words', $words);
         echo $this->loadView('footer');
     }
@@ -31,4 +32,16 @@ class Words extends Controller
         $this->model->insertWord($tableName, $word);
     }
 
+    public function delete()
+    {
+        $word = $_POST['word'];
+        $this->model->deleteWord($word);
+    }
+
+    public function edit()
+    {
+        $word = $_POST['word'];
+        $editValue = $_POST['editedWord'];
+        $this->model->editWord($word, $editValue);
+    }
 }

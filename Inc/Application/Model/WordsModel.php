@@ -25,4 +25,16 @@ class WordsModel extends Model
         }
         $this->con->insert($tableName, $data);
     }
+
+    public function deleteWord($word)
+    {
+        $deleteWord = '"'.trim($word).'"';
+        $this->con->delete('words', "word = $deleteWord");
+    }
+
+    public function editWord($word, $editValue)
+    {
+        $data = ["word" => trim($editValue)];
+        $this->con->update('words', $data, "word = '$word'");
+    }
 }
