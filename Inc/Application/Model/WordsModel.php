@@ -28,17 +28,6 @@ class WordsModel extends Model
         return $numberOfPages;
     }
 
-    public function insertWord($tableName, $word)
-    {
-        $data = [];
-        if (isset($_POST['word']) && $tableName === 'words') {
-            $data = ["word" => $word];
-        } elseif (isset($_POST['word']) && $tableName === 'patterns') {
-            $data = ["pattern" => $word];
-        }
-        $this->con->insert($tableName, $data);
-    }
-
     public function deleteWord($word)
     {
         $deleteWord = '"' . trim($word) . '"';
