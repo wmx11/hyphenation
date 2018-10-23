@@ -15,5 +15,6 @@
         <?php $page = $data['paginate']->paginate();?>
         <div class='next'><a href='/index.php/<?php echo $page['page']?>/<?php echo $page['nextPage'];?>'><i class="fas fa-arrow-right"></i></a></div>
         <div class='previous'><a href='/index.php/<?php echo $page['page']?>/<?php echo $page['prevPage'];?>'><i class="fas fa-arrow-left"></i></a></div>
-        <div class="curPage"><?php echo "Page: " . $page['pageNumber']/10 . "/" . $data['numberOfPages'];?></div>
+        <?php $pageNumber = $page['pageNumber']/10+1;?>
+        <div class="curPage"><?php echo "Page: " . $pageNumber . "/" . $data['numberOfPages'];?></div>
     </div>
