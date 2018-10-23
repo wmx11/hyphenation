@@ -9,25 +9,28 @@ use Inc\Application\Model\PatternsModel;
 class Patterns extends Controller
 {
     private $model;
-    private $pagination;
+    private $pagination = null;
 
     public function __construct()
     {
         $this->model = new PatternsModel();
-        $this->pagination = new Pagination();
+        if ($this->pagination === null) {
+            $this->pagination = new Pagination();
+        }
     }
 
     public function home()
     {
         $data['patterns'] = $this->model->getPatterns();
         $data['paginate'] = $this->pagination;
+        $data['numberOfPages'] = $this->model->getPatternPages();
 
-        echo $this->loadView('head');
-        echo $this->loadView('sidebar');
-        echo $this->loadView('submitForm');
-        echo $this->loadView('editPopup');
-        echo $this->loadView('patterns', $data);
-        echo $this->loadView('footer');
+        $this->loadView('head');
+        $this->loadView('sidebar');
+        $this->loadView('submitForm');
+        $this->loadView('editPopup');
+        $this->loadView('patterns', $data);
+        $this->loadView('footer');
     }
 
     public function delete()

@@ -21,13 +21,14 @@ class Words extends Controller
     {
         $data['words'] = $this->model->getWords();
         $data['paginate'] = $this->pagination;
+        $data['numberOfPages'] = $this->model->getWordPages();
 
-        echo $this->loadView('head');
-        echo $this->loadView('sidebar');
-        echo $this->loadView('submitForm');
-        echo $this->loadView('editPopup');
-        echo $this->loadView('words', $data);
-        echo $this->loadView('footer');
+        $this->loadView('head');
+        $this->loadView('sidebar');
+        $this->loadView('submitForm');
+        $this->loadView('editPopup');
+        $this->loadView('words', $data);
+        $this->loadView('footer');
     }
 
     public function submit()
