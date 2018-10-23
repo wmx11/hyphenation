@@ -5,12 +5,15 @@
         </div>
         <?php foreach ($data['words'] as $id => $row): ?>
             <div class="showResultWord" id="<?php echo $id; ?>">
-                <div class="result" id="<?php echo $id; ?>"><?php echo $row['word']; ?></div>
-                <div class="edit" id="<?php echo $id; ?>"><a href="#">Edit</a></div>
-                <div class="delete" id="<?php echo $id; ?>"><a href="#">Delete</a></div>
+                <div class="result"><?php echo $row['word']; ?></div>
+                <div class="edit"><a href="#">Edit</a></div>
+                <div class="delete"><a href="#">Delete</a></div>
             </div>
         <?php endforeach; ?>
     </div>
     <div class='pagination'>
-        <?php $data['paginate']->paginate(); ?>
+        <?php $page = $data['paginate']->paginate();?>
+        <div class='next'><a href='/index.php/<?php echo $page['page']?>/<?php echo $page['nextPage'];?>'><i class="fas fa-arrow-right"></i></a></div>
+        <div class='previous'><a href='/index.php/<?php echo $page['page']?>/<?php echo $page['prevPage'];?>'><i class="fas fa-arrow-left"></i></a></div>
+        <div class="curPage"><?php echo "Page: " . $page['pageNumber']/10 . "/" . $data['numberOfPages'];?></div>
     </div>
