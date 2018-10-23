@@ -11,8 +11,8 @@ class Controller
     private $method;
     private $callClass = null;
     private $callMethod = null;
-    const CONTROLLER = 2;
-    const METHOD = 3;
+    const CONTROLLER_NAME = 2;
+    const METHOD_NAME = 3;
 
     public function __destruct()
     {
@@ -36,25 +36,25 @@ class Controller
 
     public function setParameters()
     {
-        $this->setController();
-        $this->setMethod();
+        $this->setControllerName();
+        $this->setMethodName();
         $this->loadClass();
         $this->loadMethod();
     }
 
-    public function setController()
+    public function setControllerName()
     {
-        if (empty($this->uri->segment(self::CONTROLLER)) !== true) {
-            $this->controller = ucfirst($this->uri->segment(self::CONTROLLER));
+        if (empty($this->uri->segment(self::CONTROLLER_NAME)) !== true) {
+            $this->controller = ucfirst($this->uri->segment(self::CONTROLLER_NAME));
         } else {
             $this->controller = null;
         }
     }
 
-    public function setMethod()
+    public function setMethodName()
     {
-        if (empty($this->uri->segment(self::METHOD)) !== true) {
-            $this->method = $this->uri->segment(self::METHOD);
+        if (empty($this->uri->segment(self::METHOD_NAME)) !== true) {
+            $this->method = $this->uri->segment(self::METHOD_NAME);
         } else {
             $this->method = null;
         }
@@ -91,16 +91,7 @@ class Controller
             include($path);
             print ob_get_clean();
         } else {
-            echo "Page Not Found";
-        }
-    }
-
-    public function validateMethod()
-    {
-        if ($this->method === null) {
-            return false;
-        } else {
-            return true;
+            print "Page Not Found";
         }
     }
 }
