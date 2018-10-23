@@ -160,7 +160,8 @@ select {
 .pagination {
     margin: auto;
     display: block;
-    font-size: 20px;
+    margin-top:40px;
+    font-size: 30px;
 }
 
 .previous {
@@ -175,4 +176,11 @@ select {
 
 .previous a, .next a {
     text-decoration: none;
+    color:#383838;
+}
+
+.curPage {
+    margin:auto;
+    display:block;
+    text-align: center;
 }
