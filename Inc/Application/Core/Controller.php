@@ -6,7 +6,7 @@ use Inc\Model\Uri;
 
 class Controller
 {
-    public $uri;
+    private $uri;
     private $controller;
     private $method;
     private $callClass = null;
@@ -66,8 +66,8 @@ class Controller
         $callClass = $this->callClass;
         if (class_exists($class) === true && $callClass === null) {
             return $this->callClass = new $class();
-        } else {
-            echo "Page Not Found";
+        } elseif ($this->controller === null) {
+            header('Location: index.php/index');
         }
     }
 
@@ -89,7 +89,7 @@ class Controller
             ob_start();
             extract($data);
             include($path);
-            return ob_get_clean();
+            print ob_get_clean();
         } else {
             echo "Page Not Found";
         }
