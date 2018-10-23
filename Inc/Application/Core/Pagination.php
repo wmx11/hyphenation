@@ -14,13 +14,18 @@ class Pagination
         if (empty($pageSegment) === true || $pageSegment === 0) {
             $nextPage = $pageSegment + 10;
             $prevPage = 0;
-            echo "<div class='next'><a href='/main.php/$page/$nextPage'>next</a></div>";
-            echo "<div class='previous'><a href='/main.php/$page/$prevPage'>prev</a></div>";
+            $data['nextPage'] = $nextPage;
+            $data['prevPage'] = $prevPage;
+            $data['page'] = $page;
+            return $data;
         } elseif ($pageSegment >= 10) {
             $nextPage = $pageSegment + 10;
             $prevPage = $pageSegment - 10;
-            echo "<div class='next'><a href='/main.php/$page/$nextPage'>next</a></div>";
-            echo "<div class='previous'><a href='/main.php/$page/$prevPage'>prev</a></div>";
+            $data['nextPage'] = $nextPage;
+            $data['prevPage'] = $prevPage;
+            $data['page'] = $page;
+            $data['pageNumber'] = $pageSegment;
+            return $data;
         }
     }
 }
