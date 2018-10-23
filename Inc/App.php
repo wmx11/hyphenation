@@ -5,7 +5,6 @@ namespace Inc;
 use Inc\Helper\Logger;
 use Inc\AppStrategy\AppStrategy;
 use Inc\Application\Core\Controller;
-use Inc\Application\Core\Model;
 
 class App
 {
