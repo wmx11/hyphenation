@@ -10,22 +10,51 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "POST",
-                url: '/index.php/Words/submit',
+                url: '/index.php/submit/insert',
                 data: string,
                 success: function () {
-                    console.log('Submitted');
+                    $("#submitForm").css("display", "block");
                 }
             });
         }
     });
 });
 
+$(document).ready(function() {
+    var patterns = $(".showResultPattern");
+    var words = $(".showResultWord");
+    var stats = $(".statsWrapper");
+
+    patterns.css("transition", "0.15s");
+    patterns.css("margin-left", "10px");
+
+    words.css("transition", "0.15s");
+    words.css("margin-left", "10px");
+
+    stats.css("margin-left", "10px");
+    setTimeout(function(){
+        patterns.css("opacity", "1");
+        patterns.css("margin-left", "0px");
+
+        words.css("opacity", "1");
+        words.css("margin-left", "0px");
+        stats.css("margin-left", "0px");
+
+        stats.css("opacity", "1");
+    },100);
+})
+
 //Display add form
 function display() {
     var button = document.getElementById("addNew");
     var form = document.getElementById("submitForm");
 
+    form.style.opacity = 0;
     form.style.display = "block";
+    form.style.transition = "0.1s";
+    setTimeout(function() {
+        form.style.opacity = 1;
+    },100);
 }
 
 //Pattern Delete
