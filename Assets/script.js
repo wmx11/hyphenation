@@ -10,7 +10,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 type: "POST",
-                url: '/main.php/Words/submit',
+                url: '/index.php/Words/submit',
                 data: string,
                 success: function () {
                     console.log('Submitted');
@@ -31,13 +31,13 @@ function display() {
 //Pattern Delete
 $(document).ready(function () {
     $(".showResultPattern .delete").click(function () {
-        var patternId = this.id;
-        var result = $("#" + patternId + ".result").text();
+        var patternId = $(this).parent().attr("id");
+        var result = $("#" + patternId).children(".result").text();
         var resultWrapper = $("#" + patternId + ".showResultPattern");
         var string = 'pattern=' + result;
         $.ajax({
             type: "POST",
-            url: "/main.php/patterns/delete",
+            url: "/index.php/patterns/delete",
             data: string,
             success: function () {
                 resultWrapper.fadeOut(400, function () {
@@ -51,13 +51,13 @@ $(document).ready(function () {
 //Word Delete
 $(document).ready(function () {
     $(".showResultWord .delete").click(function () {
-        var wordId = this.id;
-        var result = $("#" + wordId + ".result").text();
+        var wordId = $(this).parent().attr("id");
+        var result = $("#" + wordId).children(".result").text();
         var resultWrapper = $("#" + wordId + ".showResultWord");
         var string = 'word=' + result;
         $.ajax({
             type: "POST",
-            url: "/main.php/words/delete",
+            url: "/index.php/words/delete",
             data: string,
             success: function () {
                 resultWrapper.fadeOut(400, function () {
@@ -72,15 +72,14 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".showResultWord .edit").mouseup(function () {
         $("#editPopup").show().css('display', 'flex');
-        var wordId = this.id;
-        var result = $("#" + wordId + ".result").text();
+        var wordId = $(this).parent().attr("id");
+        var result = $("#" + wordId).children(".result").text();
         var resultWrapper = $("#" + wordId + ".showResultWord");
         $("#editWord").val(result);
-
-        $("#editForm").on('submit', function () {
+        $("#editForm").on('submit', function (e) {
             $.ajax({
                 type: "POST",
-                url: "/main.php/words/edit",
+                url: "/index.php/words/edit",
                 data: 'word=' + result + '&editedWord=' + $("#editWord").val(),
                 success: function () {
                 }
@@ -98,17 +97,18 @@ $(document).ready(function () {
 $(document).ready(function () {
     $(".showResultPattern .edit").mouseup(function () {
         $("#editPopup").show().css('display', 'flex');
-        var wordId = this.id;
-        var result = $("#" + wordId + ".result").text();
+        var wordId = $(this).parent().attr("id");
+        var result = $("#" + wordId).children(".result").text();
         var resultWrapper = $("#" + wordId + ".showResultPattern");
         $("#editWord").val(result);
-
-        $("#editForm").on('submit', function () {
+        $("#editForm").on('submit', function (e) {
+            e.preventDefault();
             $.ajax({
                 type: "POST",
-                url: "/main.php/patterns/edit",
+                url: "/index.php/patterns/edit",
                 data: 'pattern=' + result + '&editedPattern=' + $("#editWord").val(),
                 success: function () {
+
                 }
             });
         });
