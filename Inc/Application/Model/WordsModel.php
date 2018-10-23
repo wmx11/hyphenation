@@ -6,18 +6,26 @@ use Inc\Application\Core\Model;
 
 class WordsModel extends Model
 {
+    private $itemsPerPage = 10;
+    private $limit = 0;
+
     public function getWords()
     {
-        $itemsPerPage = 10;
-        $limit = 0;
         if (!empty(explode("/", $_SERVER['REQUEST_URI'])[3])) {
-            $limit = explode("/", $_SERVER['REQUEST_URI'])[3];
+            $this->limit = explode("/", $_SERVER['REQUEST_URI'])[3];
         }
         $this->con->select('*');
         $this->con->from('words');
         $this->con->orderBy('id', 'desc');
-        $this->con->limit("$limit, $itemsPerPage");
+        $this->con->limit("$this->limit, $this->itemsPerPage");
         return $this->con->get();
+    }
+
+    public function getWordPages()
+    {
+        $numberOfWords = $this->con->get('COUNT(*)', 'words');
+        $numberOfPages = ceil($numberOfWords[0]['COUNT(*)'] / $this->itemsPerPage);
+        return $numberOfPages;
     }
 
     public function insertWord($tableName, $word)

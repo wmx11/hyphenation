@@ -6,23 +6,26 @@ use Inc\Application\Core\Model;
 
 class PatternsModel extends Model
 {
+    private $itemsPerPage = 10;
+    private $limit = 0;
+
     public function getPatterns()
     {
-        $itemsPerPage = 10;
-        $limit = 0;
         if (!empty(explode("/", $_SERVER['REQUEST_URI'])[3])) {
-            $limit = explode("/", $_SERVER['REQUEST_URI'])[3];
+            $this->limit = explode("/", $_SERVER['REQUEST_URI'])[3];
         }
         $this->con->select('*');
         $this->con->from('patterns');
-        $this->con->orderBy('id', 'asc');
-        $this->con->limit("$limit, $itemsPerPage");
+        $this->con->orderBy('id', 'desc');
+        $this->con->limit("$this->limit, $this->itemsPerPage");
         return $this->con->get();
     }
 
-    public function patternCount()
+    public function getPatternPages()
     {
-        return $this->con->get("COUNT(*)", 'patterns');
+        $numberOfWords = $this->con->get('COUNT(*)', 'patterns');
+        $numberOfPages = ceil($numberOfWords[0]['COUNT(*)'] / $this->itemsPerPage);
+        return $numberOfPages;
     }
 
     public function getPattern($pattern)
@@ -41,8 +44,9 @@ class PatternsModel extends Model
 
     public function editPattern($pattern, $editValue)
     {
-        $data = ["pattern" => trim($editValue)];
+        $data = array("pattern" => trim($editValue));
         $updatePattern = '"' . trim($pattern) . '"';
         $this->con->update('patterns', $data, "pattern = $updatePattern");
     }
 }
+
