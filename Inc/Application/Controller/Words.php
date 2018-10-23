@@ -31,13 +31,6 @@ class Words extends Controller
         $this->loadView('footer');
     }
 
-    public function submit()
-    {
-        $tableName = $_POST['table'];
-        $word = $_POST['word'];
-        $this->model->insertWord($tableName, $word);
-    }
-
     public function delete()
     {
         $word = $_POST['word'];
