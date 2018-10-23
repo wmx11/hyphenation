@@ -25,7 +25,7 @@ class App
     public function runApp()
     {
         if (empty($_SERVER['REQUEST_URI']) !== true) {
-            $controller = Controller::init();
+            Controller::init();
             $this->container->inject('Api')->runApi();
         } else {
             echo file_get_contents("TextFiles/StartMessage.txt") . "\r\n";
