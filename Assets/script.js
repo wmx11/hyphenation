@@ -100,7 +100,11 @@ $(document).ready(function () {
 // Word Editing
 $(document).ready(function () {
     $(".showResultWord .edit").mouseup(function () {
-        $("#editPopup").show().css('display', 'flex');
+        var popup = $("#editPopup");
+        popup.css('display', 'flex');
+        setTimeout(function() {
+            popup.css('opacity', '1');
+        },100)
         var wordId = $(this).parent().attr("id");
         var result = $("#" + wordId).children(".result").text();
         var resultWrapper = $("#" + wordId + ".showResultWord");
@@ -116,8 +120,10 @@ $(document).ready(function () {
         });
     });
     $("#editPopup").click(function (e) {
+        var popup = $("#editPopup");
         if (!$(e.target).closest("#editWord").length) {
-            $("#editPopup").fadeOut(100);
+            popup.fadeOut(200);
+            popup.css('opacity', '0');
         }
     })
 });
@@ -125,7 +131,11 @@ $(document).ready(function () {
 //Pattern Editing
 $(document).ready(function () {
     $(".showResultPattern .edit").mouseup(function () {
-        $("#editPopup").show().css('display', 'flex');
+        var popup = $("#editPopup");
+        popup.css('display', 'flex');
+        setTimeout(function() {
+            popup.css('opacity', '1');
+        },100)
         var wordId = $(this).parent().attr("id");
         var result = $("#" + wordId).children(".result").text();
         var resultWrapper = $("#" + wordId + ".showResultPattern");
@@ -137,14 +147,14 @@ $(document).ready(function () {
                 url: "/index.php/patterns/edit",
                 data: 'pattern=' + result + '&editedPattern=' + $("#editWord").val(),
                 success: function () {
-
                 }
             });
         });
     });
     $("#editPopup").click(function (e) {
         if (!$(e.target).closest("#editWord").length) {
-            $("#editPopup").fadeOut(100);
+            popup.fadeOut(200);
+            popup.css('opacity', '0');
         }
     })
 });
