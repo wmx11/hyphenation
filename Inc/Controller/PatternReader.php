@@ -25,19 +25,19 @@ class PatternReader implements PatternsInterface
         }
     }
 
-    private function setPattern($input)
+    public function setPattern($input)
     {
         $this->patterns = $input;
     }
 
-    private function setPatternsWithoutNumbers()
+    public function setPatternsWithoutNumbers()
     {
         foreach ($this->patterns as $pattern) {
             $this->patternWithoutNumbers[] = trim(preg_replace('/[0-9]+/', '', $pattern));
         }
     }
 
-    private function setPatternsWithoutLetters()
+    public function setPatternsWithoutLetters()
     {
         foreach ($this->patterns as $pattern) {
             $this->patternWithoutCharacters[] = trim(preg_replace('/[aA-zZ.]/', '', $pattern));

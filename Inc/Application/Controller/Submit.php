@@ -20,9 +20,4 @@ class Submit extends Controller
         $word = $_POST['word'];
         $this->model->insertWord($tableName, $word);
     }
-
-    public function hyphenate()
-    {
-
-    }
 }

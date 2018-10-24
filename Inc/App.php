@@ -24,8 +24,8 @@ class App
     public function runApp()
     {
         if (empty($_SERVER['REQUEST_URI']) !== true) {
-            Controller::init();
             $this->container->inject('Api')->runApi();
+            Controller::init();
         } else {
             echo file_get_contents("TextFiles/StartMessage.txt") . "\r\n";
             $input = readline("What would you like to do?: ");

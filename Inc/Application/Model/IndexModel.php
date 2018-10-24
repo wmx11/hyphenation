@@ -19,4 +19,9 @@ class IndexModel extends Model
         return number_format($words[0]['COUNT(*)']);
     }
 
+    public function getTest()
+    {
+        return "ASSSDASDASDASDASD";
+    }
+
 }

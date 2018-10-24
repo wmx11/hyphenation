@@ -4,13 +4,13 @@ namespace Inc\Application\Core;
 
 class Pagination
 {
-    const PAGE = 3;
-    const CONTROLLER = 2;
+    const POSITION_PAGE_NUMBER = 3;
+    const POSITION_CONTROLLER_NAME = 2;
 
     public function paginate()
     {
-        $pageSegment = explode("/", $_SERVER['REQUEST_URI'])[self::PAGE];
-        $page = explode("/", $_SERVER['REQUEST_URI'])[self::CONTROLLER];
+        $pageSegment = explode("/", $_SERVER['REQUEST_URI'])[self::POSITION_PAGE_NUMBER];
+        $page = explode("/", $_SERVER['REQUEST_URI'])[self::POSITION_CONTROLLER_NAME];
         if (empty($pageSegment) === true || $pageSegment === 0) {
             $nextPage = $pageSegment + 10;
             $prevPage = 0;

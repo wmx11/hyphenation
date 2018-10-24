@@ -11,8 +11,8 @@ class Controller
     private $method;
     private $callClass = null;
     private $callMethod = null;
-    const CONTROLLER_NAME = 2;
-    const METHOD_NAME = 3;
+    const POSITION_CONTROLLER_NAME = 2;
+    const POSITION_METHOD_NAME = 3;
 
     public function __destruct()
     {
@@ -44,8 +44,8 @@ class Controller
 
     public function setControllerName()
     {
-        if (empty($this->uri->segment(self::CONTROLLER_NAME)) !== true) {
-            $this->controller = ucfirst($this->uri->segment(self::CONTROLLER_NAME));
+        if (empty($this->uri->segment(self::POSITION_CONTROLLER_NAME)) !== true) {
+            $this->controller = ucfirst($this->uri->segment(self::POSITION_CONTROLLER_NAME));
         } else {
             $this->controller = null;
         }
@@ -53,8 +53,8 @@ class Controller
 
     public function setMethodName()
     {
-        if (empty($this->uri->segment(self::METHOD_NAME)) !== true) {
-            $this->method = $this->uri->segment(self::METHOD_NAME);
+        if (empty($this->uri->segment(self::POSITION_METHOD_NAME)) !== true) {
+            $this->method = $this->uri->segment(self::POSITION_METHOD_NAME);
         } else {
             $this->method = null;
         }

@@ -42,10 +42,15 @@ class Words extends AbstractWordsParser implements WordsInterface
 
     public function setWord($input)
     {
-        $this->word = ".{$input}.";
+        $this->createWord($input);
         $this->setWordLength($this->word);
         $this->setWordLettersArray($this->word);
         $this->setWordLengthArrayEmpty();
+    }
+
+    public function createWord($input)
+    {
+        $this->word = ".{$input}.";
     }
 
 
@@ -111,7 +116,7 @@ class Words extends AbstractWordsParser implements WordsInterface
         }
     }
 
-    private function cleanWord($matchedArray)
+    public function cleanWord($matchedArray)
     {
         $wordWithNumbers = implode("", $matchedArray);
         $removeDots = str_replace('.', '', $wordWithNumbers);
@@ -123,6 +128,21 @@ class Words extends AbstractWordsParser implements WordsInterface
     public function getWord()
     {
         return trim($this->word);
+    }
+
+    public function getWordLength()
+    {
+        return $this->wordLength;
+    }
+
+    public function getWordLettersArray()
+    {
+        return $this->wordLettersArray;
+    }
+
+    public function  getWordLengthArrayEmpty()
+    {
+        return $this->wordLengthArrayEmpty;
     }
 
     public function getWordCount()

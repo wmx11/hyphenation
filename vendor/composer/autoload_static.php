@@ -7,16 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
 {
     public static $files = array (
-        'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        's' => 
-        array (
-            'syllables\\' => 10,
-        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -25,37 +19,19 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         array (
             'Webmozart\\Assert\\' => 17,
         ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Util\\' => 22,
-            'Symfony\\Polyfill\\Php56\\' => 23,
-            'SuperClosure\\' => 13,
-        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
-            'Psr\\Container\\' => 14,
-            'PhpParser\\' => 10,
-            'PhpDocReader\\' => 13,
-        ),
-        'I' => 
-        array (
-            'Invoker\\' => 8,
         ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
-            'DI\\' => 3,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'syllables\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/syllables',
-        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -66,18 +42,6 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'Symfony\\Polyfill\\Util\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-util',
-        ),
-        'Symfony\\Polyfill\\Php56\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php56',
-        ),
-        'SuperClosure\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
-        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -86,22 +50,6 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'PhpParser\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
-        ),
-        'PhpDocReader\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
-        ),
-        'Invoker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/invoker/src',
-        ),
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -109,10 +57,6 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-        ),
-        'DI\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-di/php-di/src',
         ),
     );
 
@@ -127,6 +71,41 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
     );
 
     public static $classMap = array (
+        'Inc\\Api' => __DIR__ . '/../..' . '/Inc/Api.php',
+        'Inc\\App' => __DIR__ . '/../..' . '/Inc/App.php',
+        'Inc\\AppStrategy\\AppStrategy' => __DIR__ . '/../..' . '/Inc/AppStrategy/AppStrategy.php',
+        'Inc\\AppStrategy\\AppStrategyInterface' => __DIR__ . '/../..' . '/Inc/AppStrategy/AppStrategyInterface.php',
+        'Inc\\AppStrategy\\HyphenateFromDb' => __DIR__ . '/../..' . '/Inc/AppStrategy/HyphenateFromDb.php',
+        'Inc\\AppStrategy\\HyphenateFromFile' => __DIR__ . '/../..' . '/Inc/AppStrategy/HyphenateFromFile.php',
+        'Inc\\AppStrategy\\HyphenateWord' => __DIR__ . '/../..' . '/Inc/AppStrategy/HyphenateWord.php',
+        'Inc\\Application\\Controller\\Index' => __DIR__ . '/../..' . '/Inc/Application/Controller/Index.php',
+        'Inc\\Application\\Controller\\Patterns' => __DIR__ . '/../..' . '/Inc/Application/Controller/Patterns.php',
+        'Inc\\Application\\Controller\\Submit' => __DIR__ . '/../..' . '/Inc/Application/Controller/Submit.php',
+        'Inc\\Application\\Controller\\Words' => __DIR__ . '/../..' . '/Inc/Application/Controller/Words.php',
+        'Inc\\Application\\Core\\Controller' => __DIR__ . '/../..' . '/Inc/Application/Core/Controller.php',
+        'Inc\\Application\\Core\\Model' => __DIR__ . '/../..' . '/Inc/Application/Core/Model.php',
+        'Inc\\Application\\Core\\Pagination' => __DIR__ . '/../..' . '/Inc/Application/Core/Pagination.php',
+        'Inc\\Application\\Model\\IndexModel' => __DIR__ . '/../..' . '/Inc/Application/Model/IndexModel.php',
+        'Inc\\Application\\Model\\PatternsModel' => __DIR__ . '/../..' . '/Inc/Application/Model/PatternsModel.php',
+        'Inc\\Application\\Model\\TableModel' => __DIR__ . '/../..' . '/Inc/Application/Model/TableModel.php',
+        'Inc\\Application\\Model\\WordsModel' => __DIR__ . '/../..' . '/Inc/Application/Model/WordsModel.php',
+        'Inc\\Controller\\AbstractWordsParser' => __DIR__ . '/../..' . '/Inc/Controller/AbstractWordsParser.php',
+        'Inc\\Controller\\HyphenationController' => __DIR__ . '/../..' . '/Inc/Controller/HyphenationController.php',
+        'Inc\\Controller\\PatternReader' => __DIR__ . '/../..' . '/Inc/Controller/PatternReader.php',
+        'Inc\\Controller\\PatternsInterface' => __DIR__ . '/../..' . '/Inc/Controller/PatternsInterface.php',
+        'Inc\\Controller\\Words' => __DIR__ . '/../..' . '/Inc/Controller/Words.php',
+        'Inc\\Controller\\WordsInterface' => __DIR__ . '/../..' . '/Inc/Controller/WordsInterface.php',
+        'Inc\\Database\\AbstractQueryBuilder' => __DIR__ . '/../..' . '/Inc/Database/AbstractQueryBuilder.php',
+        'Inc\\Database\\Database' => __DIR__ . '/../..' . '/Inc/Database/Database.php',
+        'Inc\\Database\\DatabaseInterface' => __DIR__ . '/../..' . '/Inc/Database/DatabaseInterface.php',
+        'Inc\\Database\\QueryBuilder' => __DIR__ . '/../..' . '/Inc/Database/QueryBuilder.php',
+        'Inc\\Helper\\ApiUrlParser' => __DIR__ . '/../..' . '/Inc/Helper/ApiUrlParser.php',
+        'Inc\\Helper\\Cache' => __DIR__ . '/../..' . '/Inc/Helper/Cache.php',
+        'Inc\\Helper\\Logger' => __DIR__ . '/../..' . '/Inc/Helper/Logger.php',
+        'Inc\\Helper\\Timer' => __DIR__ . '/../..' . '/Inc/Helper/Timer.php',
+        'Inc\\Injector' => __DIR__ . '/../..' . '/Inc/Injector.php',
+        'Inc\\Model\\ProxyPattern' => __DIR__ . '/../..' . '/Inc/Model/ProxyPattern.php',
+        'Inc\\Model\\Uri' => __DIR__ . '/../..' . '/Inc/Model/Uri.php',
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -494,6 +473,7 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
+        'PatternsTest' => __DIR__ . '/../..' . '/Inc/Tests/PatternsTest.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -669,6 +649,7 @@ class ComposerStaticInitbecd164e8b410c7632bd8de1014215e4
         'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
+        'WordsTest' => __DIR__ . '/../..' . '/Inc/Tests/WordsTest.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

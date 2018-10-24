@@ -89,6 +89,7 @@ $(document).ready(function () {
             url: "/index.php/words/delete",
             data: string,
             success: function () {
+                resultWrapper.css("background", "red");
                 resultWrapper.fadeOut(400, function () {
                     resultWrapper.remove()
                 });

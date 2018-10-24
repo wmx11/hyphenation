@@ -25,4 +25,9 @@ class Index extends Controller
         $this->loadView('index', $data);
         $this->loadView('footer');
     }
+
+    public function test()
+    {
+        echo $this->model->getTest();
+    }
 }
