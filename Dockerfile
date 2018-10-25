@@ -12,7 +12,9 @@ RUN apt-get install -y git
 RUN apt-get install -y composer
 
 WORKDIR /var/www/html
-RUN git clone https://github.com/wmx11/hyphenation.git .
+RUN git clone https://github.com/wmx11/hyphenation.git tmp
+RUN mv -v tmp/* .
+RUN rm -rf tmp/
 RUN composer update
 COPY config/php.ini /etc/php/7.2/apache2/
 COPY config/000-default.conf /etc/apache2/sites-available/
