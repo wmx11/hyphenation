@@ -6,26 +6,26 @@ use Inc\Model\Uri;
 
 class ApiUrlParser extends Uri
 {
-    private $api = "api";
-    const HOOK = 2;
-    const TABLENAME = 3;
-    const ENDPOINT = 4;
-    const BEFORE_QUERY = 0;
+    private $hook = "api";
+    const POSITION_HOOK = 2;
+    const POSITION_TABLENAME = 3;
+    const POSITION_ENDPOINT = 4;
+    const POSITION_BEFORE_QUERY = 0;
 
     public function setTableNameInitial()
     {
-        return $this->segment(self::TABLENAME);
+        return $this->segment(self::POSITION_TABLENAME);
     }
 
     public function setId()
     {
-        return $this->segment(self::ENDPOINT);
+        return $this->segment(self::POSITION_ENDPOINT);
     }
 
     public function setEndpoint()
     {
-        if (is_numeric($this->segment(self::ENDPOINT)) === false) {
-            return $this->segment(self::ENDPOINT);
+        if (is_numeric($this->segment(self::POSITION_ENDPOINT)) === false) {
+            return $this->segment(self::POSITION_ENDPOINT);
         }
     }
 
@@ -33,15 +33,15 @@ class ApiUrlParser extends Uri
     {
         $url = $this->getUrl();
         if (strpos($url, "?") !== false) {
-            $url_path = explode("?", $url)[self::BEFORE_QUERY];
-            $tableName = explode('/', $url_path)[self::TABLENAME];
+            $url_path = explode("?", $url)[self::POSITION_BEFORE_QUERY];
+            $tableName = explode('/', $url_path)[self::POSITION_TABLENAME];
             return $tableName;
         }
     }
 
     public function validateUrlGet()
     {
-        if ($this->segment(self::HOOK) === $this->api && empty($this->segment(self::ENDPOINT)) === true) {
+        if ($this->segment(self::POSITION_HOOK) === $this->hook && empty($this->segment(self::POSITION_ENDPOINT)) === true) {
             return true;
         } else {
             return false;
@@ -59,7 +59,7 @@ class ApiUrlParser extends Uri
 
     public function validateAnchor()
     {
-        if ($this->segment(self::HOOK) === $this->api) {
+        if ($this->segment(self::POSITION_HOOK) === $this->hook) {
             return true;
         } else {
             return false;
@@ -68,7 +68,7 @@ class ApiUrlParser extends Uri
 
     public function validateUrlParametersGet()
     {
-        if ($this->segment(self::HOOK) === $this->api && filter_var($this->segment(self::ENDPOINT), FILTER_VALIDATE_INT)) {
+        if ($this->segment(self::POSITION_HOOK) === $this->hook && filter_var($this->segment(self::POSITION_ENDPOINT), FILTER_VALIDATE_INT)) {
             return true;
         } else {
             return false;
