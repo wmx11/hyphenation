@@ -8,8 +8,8 @@ class Injector
 {
     private $container = [];
     private $dependency;
-    const CLASSNAME = 0;
-    const DEPENDENCY = 1;
+    const POSITION_CLASSNAME = 0;
+    const POSITION_DEPENDENCY = 1;
 
     public function __construct()
     {
@@ -32,10 +32,13 @@ class Injector
     public function setClass($name, $nameSpace, $filepath = null)
     {
         $this->getDependency($nameSpace);
+
         if ($this->dependency === null && $filepath === null) {
             $this->container[$name] = [$name => $nameSpace];
+
         } elseif ($this->dependency === null && $filepath !== null) {
             $this->container[$name] = [$name => $nameSpace . " " . $filepath];
+
         } elseif ($this->dependency !== null && $filepath === null) {
             $this->container[$name] = [$name => $nameSpace . " " . $this->dependency];
         }
@@ -45,8 +48,8 @@ class Injector
     {
         $reflector = new ReflectionClass($class);
         $dependencyClass = $reflector->getConstructor()->getParameters();
-        if (!empty($dependencyClass) && !empty($dependencyClass[self::CLASSNAME]->getClass()->name)) {
-            return $this->dependency = $dependencyClass[self::CLASSNAME]->getClass()->name;
+        if (!empty($dependencyClass) && !empty($dependencyClass[self::POSITION_CLASSNAME]->getClass()->name)) {
+            return $this->dependency = $dependencyClass[self::POSITION_CLASSNAME]->getClass()->name;
         } else {
             return $this->dependency = null;
         }
@@ -60,13 +63,16 @@ class Injector
     public function inject($class)
     {
         $classname = $this->container[$class][$class];
+
         $object = explode(" ", $classname);
-        if (empty($object[self::CLASSNAME]) !== true && empty($object[self::DEPENDENCY]) === true) {
-            return new $object[self::CLASSNAME];
-        } elseif (empty($object[self::DEPENDENCY]) !== true && class_exists($object[self::DEPENDENCY]) === true) {
-            return new $object[self::CLASSNAME](new $object[self::DEPENDENCY]);
-        } elseif (empty($object[self::DEPENDENCY]) !== true && file_exists($object[self::DEPENDENCY]) === true) {
-            return new $object[self::CLASSNAME]($object[self::DEPENDENCY]);
+        if (empty($object[self::POSITION_CLASSNAME]) !== true && empty($object[self::POSITION_DEPENDENCY]) === true) {
+            return new $object[self::POSITION_CLASSNAME];
+
+        } elseif (empty($object[self::POSITION_DEPENDENCY]) !== true && class_exists($object[self::POSITION_DEPENDENCY]) === true) {
+            return new $object[self::POSITION_CLASSNAME](new $object[self::POSITION_DEPENDENCY]);
+
+        } elseif (empty($object[self::POSITION_DEPENDENCY]) !== true && file_exists($object[self::POSITION_DEPENDENCY]) === true) {
+            return new $object[self::POSITION_CLASSNAME]($object[self::POSITION_DEPENDENCY]);
         }
     }
 }
